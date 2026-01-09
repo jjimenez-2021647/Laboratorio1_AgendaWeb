@@ -1,0 +1,493 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: normal;
+    background-color: black;
+    background-image: url('../Images/FondoLogin.jpg');
+    /*la imagen de fondo */
+    background-size: cover;
+}
+
+.container {
+    max-width: 2080px;
+    margin: auto;
+}
+
+.segundo_contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 100vh;
+    padding: 120px 0 0;
+    /* Aumentado para evitar superposición */
+}
+
+/*NAV*/
+nav {
+    width: 100%;
+    background-color: rgba(41, 41, 41, 0.623);
+    position: fixed;
+    z-index: 9999;
+    padding: 8px;
+}
+
+/*letra dentro del div que esta de color blanco en el logo*/
+nav .logo {
+    color: rgb(255, 255, 255);
+    font-size: 80px;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+/*la letra que esta dentro del span de color Celeste*/
+nav .logo span {
+    color: #4b3e64;
+}
+
+nav .container {
+    padding: 0 25px;
+}
+
+/*informacion*/
+/*medidas del div informacion*/
+.informacion {
+    flex: 0 0 50%;
+    padding: 30px;
+}
+
+/*la linea que esta arriba del texto*/
+.informacion .line {
+    width: 15%;
+    height: 2px;
+    background-color: #00b7ff;
+    display: inline-block;
+}
+
+/*titulo de la informacion parte blanca*/
+.informacion h2 {
+    margin-top: 25px;
+    font-size: 70px;
+    color: white;
+    line-height: 55px;
+}
+
+/*segunda parte de la infrmacion que esta en el titulo de color rojo*/
+.informacion h2 span {
+    color: #00b7ff;
+    font-size: 72px;
+}
+
+/*subtitulo del titulo de informacion*/
+.informacion p {
+    color: whitesmoke;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*boton de contacto*/
+.btnContacto {
+    height: 44px;
+    padding: 0px 30px;
+    background-color: #00b7ff;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    letter-spacing: 1px;
+    border: none;
+    margin-top: 15px;
+    box-shadow: 0px 8px 24px 0 rgba(255, 255, 255, 0.384);
+    transition: all .2s linear;
+}
+
+.btnContacto:hover {
+    background-color: white;
+    color: #00b7ff;
+    box-shadow: 0 8px 24px 0 rgba(138, 140, 146, .2);
+    transform: scale(1.1) translateY(-3px);
+}
+
+/*boton de iniciar el login*/
+.btnIniciar {
+    height: 44px;
+    padding: 0px 30px;
+    background-color: #00b7ff;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    letter-spacing: 1px;
+    border: none;
+    margin-top: 15px;
+    box-shadow: 0px 8px 24px 0 rgba(255, 255, 255, 0.384);
+    transition: all .2s linear;
+}
+
+.btnIniciar:hover {
+    background-color: white;
+    color: #00b7ff;
+    box-shadow: 0 8px 24px 0 rgba(138, 140, 146, .2);
+    transform: scale(1.1) translateY(-3px);
+}
+
+/*boton del registrarme*/
+.btnRegistrar {
+    height: 44px;
+    padding: 0px 30px;
+    background-color: #00b7ff;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    letter-spacing: 1px;
+    border: none;
+    margin-top: 15px;
+    box-shadow: 0px 8px 24px 0 rgba(255, 255, 255, 0.384);
+    transition: all .2s linear;
+}
+
+.btnRegistrar:hover {
+    background-color: white;
+    color: #00b7ff;
+    box-shadow: 0 8px 24px 0 rgba(138, 140, 146, .2);
+    transform: scale(1.1) translateY(-3px);
+}
+
+.redes-sociales {
+    margin-top: 60px;
+}
+
+.redes-sociales a {
+    color: white;
+    margin-right: 22px;
+    font-size: 22px;
+    text-decoration: none;
+    transition: all .2s linear;
+}
+
+.redes-sociales a:hover {
+    color: #00b7ff;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login {
+    flex: 0 10% 50%;
+    padding: 20px;
+}
+
+.login h4 {
+    font-weight: 600;
+    color: white;
+}
+
+.login h6 {
+    color: white;
+    margin-bottom: 30px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+/*toda la parte del switch para hacer el cambio del login y el registrar*/
+.checkbox:checked+label,
+.checkbox:not(:checked)+label {
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 60px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: #00b7ff;
+    padding: 0;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.checkbox:checked+label::before,
+.checkbox:not(:checked)+label::before {
+    position: absolute;
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #00b7ff;
+    background-color: white;
+    font-family: 'Material Icons';
+    content: '\f1e2';
+    z-index: 20;
+    top: -10px;
+    left: -10px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 24px;
+    transition: all .5s ease;
+}
+
+.checkbox:checked+label::before {
+    transform: translateX(44px) rotate(-270deg);
+}
+
+.link {
+    color: whiteSmoke;
+    margin-top: 20px;
+    display: block;
+}
+
+.link:hover {
+    color: #00b7ff;
+}
+
+.login h6 span {
+    padding: 0 35px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.card-3d-wrap {
+    position: relative;
+    width: 450px;
+    max-width: 100%;
+    height: 400px;
+    margin-top: 60px;
+    transform-style: preserve-3d;
+    perspective: 800px;
+}
+
+.card-3d-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transition: all .6s ease-out;
+}
+
+.checkbox:checked~.card-3d-wrap .card-3d-wrapper {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background-color: #000000;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 300%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-style: preserve-3d;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.center-wrap {
+    position: absolute;
+    width: 100%;
+    padding: 35px;
+    top: 50%;
+    left: 0;
+    transform: translate3d(0, -50%, 35px) perspective(100px);
+    display: block;
+    z-index: 20;
+}
+
+.heading {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.form-group {
+    margin: 25px;
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-group input::placeholder {
+    color: rgb(0, 0, 0);
+    opacity: .5;
+    transition: all .2s linear;
+}
+
+.form-group input:focus::placeholder {
+    opacity: 0;
+    transition: all .2s linear;
+}
+
+.form-style {
+    padding: 13px 20px;
+    padding-left: 55px;
+    height: 48px;
+    width: 100%;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    outline: none;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0px 4px 8px 0 rgba(21, 21, 21, .2);
+}
+
+.form-style:focus,
+.form-style:active {
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 8px 0 rgba(21, 21, 21, .2);
+}
+
+.input-icon {
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    height: 48px;
+    font-size: 24px;
+    text-align: left;
+    color: #00b7ff;
+    transition: all .2s linear;
+}
+
+.text-center {
+    text-align: center;
+}
+/*MEDIA QUERIES*/
+@media (max-width: 992px) {
+    nav .menu-btn i {
+        display: block;
+    }
+
+    nav .container {
+        padding: 0;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 85px;
+        left: -100%;
+        background-color: #1B1B1B;
+        height: 320px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        transition: all .3s ease;
+    }
+
+    #click:checked~ul {
+        left: 0;
+    }
+
+    nav ul li {
+        margin: 20px 0;
+    }
+
+    nav ul li a {
+        display: block;
+        font-size: 20px;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+        background: none;
+        color: #00b7ff;
+    }
+
+    .informacion h2 {
+        font-size: 40px;
+    }
+
+    .informacion h2 span {
+        font-size: 42px;
+    }
+
+    .informacion p {
+        font-size: 14px;
+    }
+
+    .card-3d-wrap {
+        width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .informacion,
+    .login {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .informacion {
+        display: grid;
+        place-items: center;
+        order: 2;
+    }
+
+    .login {
+        order: 1;
+    }
+
+    .informacion h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .informacion h2 {
+        font-size: 28px;
+    }
+
+    .informacion h2 span {
+        font-size: 30px;
+    }
+
+    .card-3d-wrap {
+        width: 300px;
+    }
+}
