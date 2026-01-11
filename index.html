@@ -1,95 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K.C - Login</title>
-    <link rel="icon" type="image/x-icon" href="../Images/Logo_K.C.png">
+    <title>MyDaily - Login</title>
+    <link rel="icon" type="image/x-icon" href="Images/Icono - Login.png">
     <link rel="stylesheet" href="./Styles/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-icons@1.13.12/iconfont/material-icons.min.css">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">P<span>lanify</span></div>
-
+    <div class="contenedor-login">
+        <div class="login-izquierda">
+            <h1>MyDaily</h1>
+            <div class="ilustracion-contactos">
+                <img src="./Images/Icono - Login.png" alt="Ilustración MyDaily">
+            </div>
+            <p>Diseñada para organizar tu rutina diaria de manera simple y efectiva</p>
         </div>
-    </nav>
 
-    <section>
-        <div class="container">
-            <div class="segundo_contenedor">
-                <div class="informacion">
-                    <span class="line"></span>
-                    <h2>Bienvenido a <br><span>Planify</span></h2>
-                    <p>Tu tiempo, bajo control</p>
-                    <a href="https://wa.link/cp8m9x" class="btnContacto">Contactanos</a>
-                    <div class="redes-sociales">
-                        <a href="https://www.facebook.com/jefry.yuman?locale=es_LA"><i
-                                class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/andrexd_34/"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://discord.gg/K5C57rwJGM"><i class="fa-brands fa-discord"></i></a>
+        <div class="flip-card">
+            <div class="flip-card-inner" id="flipCard">
+                <div class="flip-card-front">
+                    <div class="login-derecha">
+                        <h2>Bienvenido</h2>
+                        <p>Inicia sesión para continuar</p>
+
+                        <form id="formularioLogin" action="tu-servlet-aqui" method="POST">
+                            <div class="grupo-formulario">
+                                <label for="correo">Correo electrónico:</label>
+                                <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" required>
+                            </div>
+
+                            <div class="grupo-formulario">
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña"
+                                    required>
+                            </div>
+
+                            <div class="opciones-formulario">
+                                <label class="recordarme">
+                                    <input type="checkbox" id="recordar" name="recordar">
+                                    <span>Recordarme</span>
+                                </label>
+                                <a href="#" class="olvido-contrasena">¿Olvidaste tu contraseña?</a>
+                            </div>
+
+                            <button type="submit" class="boton-login">Iniciar Sesión</button>
+                        </form>
+
+                        <div class="texto-registro">
+                            ¿No tienes cuenta? <a href="#" id="btnRegistro">Regístrate aquí</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="login">
-                    <div class="form">
-                        <div class="text-center">
-                            <h6><span>Login </span> <span>Sign up</span></h6>
-                            <input type="checkbox" class="checkbox" id="reg-log">
-                            <label for="reg-log"></label>
-                            <div class="card-3d-wrap">
-                                <div class="card-3d-wrapper">
-                                    <div class="card-front">
-                                        <div class="center-wrap">
-                                            <h4 class="heading">Inicio de Sesion</h4>
-                                            <div class="form-group">
-                                                <input type="email" class="form-style" placeholder="Email"
-                                                    autocomplete="off">
-                                                <i class="input-icon material-icons">alternate_email</i>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-style" placeholder="Contraseña"
-                                                    autocomplete="off">
-                                                <i class="input-icon material-icons">lock</i>
-                                            </div>
-                                            <a href="menu.html" class="btnIniciar">Entrar</a>
-                                            <p class="text-center"><a href="#" class="link">No te recuerdas de tu
-                                                    contraseña???</a></p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="card-back">
-                                        <div class="center-wrap">
-                                            <h4 class="heading">Registrarse</h4>
-                                            <div class="form-group">
-                                                <input type="text" class="form-style" placeholder="Usuario"
-                                                    autocomplete="off">
-                                                <i class="input-icon material-icons">perm_identity</i>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-style" placeholder="Email"
-                                                    autocomplete="off">
-                                                <i class="input-icon material-icons">alternate_email</i>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-style" placeholder="Contraseña"
-                                                    autocomplete="off">
-                                                <i class="input-icon material-icons">lock</i>
-                                            </div>
-                                            <a href="#" class="btnRegistrar">Registrarme</a>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="flip-card-back">
+                    <div class="login-derecha">
+                        <h2>Crea tu cuenta</h2>
+                        <p>Regístrate para comenzar</p>
+
+                        <form id="formularioRegistro" action="tu-servlet-registro" method="POST">
+                            <div class="grupo-formulario">
+                                <label for="correoRegistro">Correo electrónico:</label>
+                                <input type="email" id="correoRegistro" name="correo" placeholder="Ingresa tu correo"
+                                    required>
                             </div>
+
+                            <div class="grupo-formulario">
+                                <label for="contrasenaRegistro">Contraseña:</label>
+                                <input type="password" id="contrasenaRegistro" name="contrasena" placeholder="Ingresa tu contraseña"
+                                    required>
+                            </div>
+
+                            <div class="grupo-formulario">
+                                <label for="confirmarContrasena">Confirma tu Contraseña:</label>
+                                <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder="Confirma tu contraseña" required>
+                            </div>
+
+                            <button type="submit" class="boton-login">Registrarse</button>
+                        </form>
+
+                        <div class="texto-registro">
+                            ¿Ya tienes cuenta? <a href="#" id="btnLogin">Inicia sesión aquí</a>
                         </div>
                     </div>
                 </div>
             </div>
-    </section>
+        </div>
+    </div>
+    <script src="./Scripts/index.js"></script>
 </body>
 
 </html>

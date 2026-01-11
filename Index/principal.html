@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDaily - Principal</title>
+    <link rel="icon" type="image/x-icon" href="../Images/Icono - Login.png">
+    <link rel="stylesheet" href="../Styles/principal.css">
+</head>
+<body>
+    <!-- Header transparente -->
+    <header class="header-principal">
+        <div class="contenedor-header">
+            <div class="logo">
+                <h1>MyDaily</h1>
+            </div>
+            
+            <nav class="navegacion">
+                <a href="#inicio" class="nav-link activo">Inicio</a>
+                <a href="#contactos" class="nav-link">Contactos</a>
+                <a href="#tareas" class="nav-link">Tareas</a>
+                <a href="#perfil" class="nav-link">Perfil</a>
+            </nav>
+            
+            <div class="usuario-info">
+                <span class="nombre-usuario" id="nombreUsuario">Usuario</span>
+                <button class="btn-cerrar-sesion" onclick="cerrarSesion()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="contenido-principal">
+        <div class="contenedor-contenido">
+            <section class="bienvenida">
+                <h2 id="mensajeBienvenida">¡Bienvenido de nuevo!</h2>
+                <p>Gestiona tu día de manera eficiente</p>
+            </section>
+
+            <!-- Aquí irá tu contenido -->
+            <div class="grid-contenido">
+                <div class="tarjeta">
+                    <h3>Tus Contactos</h3>
+                    <p>Administra tu lista de contactos</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3>Tus Tareas</h3>
+                    <p>Organiza tus pendientes del día</p>
+                </div>
+                
+                <div class="tarjeta">
+                    <h3>Tu Perfil</h3>
+                    <p>Actualiza tu información personal</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer con Copyright -->
+    <footer class="footer-principal">
+        <div class="contenedor-footer">
+            <p>&copy; 2026 MyDaily.</p>
+            <div class="footer-links">
+                <p>Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Scripts/datosUsuario.js"></script>
+    <script src="../Scripts/principal.js"></script>
+</body>
+</html>
