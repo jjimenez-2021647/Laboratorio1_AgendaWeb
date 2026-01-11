@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../Styles/principal.css">
 </head>
 <body>
-    <!-- Header transparente -->
     <header class="header-principal">
         <div class="contenedor-header">
             <div class="logo">
@@ -17,7 +16,7 @@
             
             <nav class="navegacion">
                 <a href="#inicio" class="nav-link activo">Inicio</a>
-                <a href="#contactos" class="nav-link">Contactos</a>
+                <a href="#seccion-contactos" class="nav-link">Contactos</a>
                 <a href="#tareas" class="nav-link">Tareas</a>
                 <a href="#perfil" class="nav-link">Perfil</a>
             </nav>
@@ -36,15 +35,17 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
     <main class="contenido-principal">
         <div class="contenedor-contenido">
+            <section class="seccion-contactos">
+
+                <!-- 
             <section class="bienvenida">
                 <h2 id="mensajeBienvenida">¡Bienvenido de nuevo!</h2>
                 <p>Gestiona tu día de manera eficiente</p>
             </section>
 
-            <!-- Aquí irá tu contenido -->
+            Tarjetas de acceso rápido
             <div class="grid-contenido">
                 <div class="tarjeta">
                     <h3>Tus Contactos</h3>
@@ -60,15 +61,146 @@
                     <h3>Tu Perfil</h3>
                     <p>Actualiza tu información personal</p>
                 </div>
-            </div>
+            </div> -->
+
+                <div class="titulo-seccion">
+                    <div class="titulo-texto">
+                        <h2>Mis Contactos</h2>
+                        <p>Lista de contactos guardados</p>
+                    </div>
+                    <button class="btn-agregar-contacto" title="Agregar contacto">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="lista-contactos">
+                    <div class="contacto-item">
+                        <div class="contacto-avatar">
+                            <img src="../Images/Contacto1.jpeg" alt="Sadie Sink" class="foto-contacto">
+                        </div>
+                        <div class="contacto-info">
+                            <h3 class="contacto-nombre">Sadie Sink</h3>
+                            <p class="contacto-telefono">+502 1234-5678</p>
+                            <p class="contacto-email">sadie.sink@gmail.com</p>
+                        </div>
+                        <div class="contacto-acciones">
+                            <button class="btn-accion" title="Ver detalles">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contacto-item">
+                        <div class="contacto-avatar">
+                            <img src="../Images/Contactos2.jpg" alt="Jefry Cruz" class="foto-contacto">
+                        </div>
+                        <div class="contacto-info">
+                            <h3 class="contacto-nombre">Jefry Cruz</h3>
+                            <p class="contacto-telefono">+502 2345-6789</p>
+                            <p class="contacto-email">jefry.cruz@gmail.com</p>
+                        </div>
+                        <div class="contacto-acciones">
+                            <button class="btn-accion" title="Ver detalles">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contacto-item">
+                        <div class="contacto-avatar">
+                            <img src="../Images/Contacto3.jpg" alt="Ana de Armas" class="foto-contacto">
+                        </div>
+                        <div class="contacto-info">
+                            <h3 class="contacto-nombre">Ana de Armas</h3>
+                            <p class="contacto-telefono">+502 3456-7890</p>
+                            <p class="contacto-email">ana.armas@gmail.com</p>
+                        </div>
+                        <div class="contacto-acciones">
+                            <button class="btn-accion" title="Ver detalles">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contacto-item">
+                        <div class="contacto-avatar">
+                            <img src="../Images/contacto4.jpg" alt="Roberto Rodriguez" class="foto-contacto">
+                        </div>
+                        <div class="contacto-info">
+                            <h3 class="contacto-nombre">Roberto Rodriguez</h3>
+                            <p class="contacto-telefono">+502 4567-8901</p>
+                            <p class="contacto-email">roberto.rodriguez@gmail.com</p>
+                        </div>
+                        <div class="contacto-acciones">
+                            <button class="btn-accion" title="Ver detalles">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contacto-item">
+                        <div class="contacto-avatar">
+                            <img src="../Images/Contacto5.jpg" alt="Emma Myers" class="foto-contacto">
+                        </div>
+                        <div class="contacto-info">
+                            <h3 class="contacto-nombre">Emma Myers</h3>
+                            <p class="contacto-telefono">+502 5678-9012</p>
+                            <p class="contacto-email">emma.myers@gmail.com</p>
+                        </div>
+                        <div class="contacto-acciones">
+                            <button class="btn-accion" title="Ver detalles">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contacto-item">
+                        <div class="contacto-avatar">
+                            <img src="../Images/contacto6.jpg" alt="Rhandy Caná" class="foto-contacto">
+                        </div>
+                        <div class="contacto-info">
+                            <h3 class="contacto-nombre">Rhandy Caná</h3>
+                            <p class="contacto-telefono">+502 6789-0123</p>
+                            <p class="contacto-email">rhandy.cana@gmail.com</p>
+                        </div>
+                        <div class="contacto-acciones">
+                            <button class="btn-accion" title="Ver detalles">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
-    <!-- Footer con Copyright -->
     <footer class="footer-principal">
         <div class="contenedor-footer">
             <p>&copy; 2026 MyDaily.</p>
-                <p>Todos los derechos reservados.</p>
+            <p>Todos los derechos reservados.</p>
         </div>
     </footer>
 
