@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-image: url('../Images/Fondo.jpeg');
@@ -15,11 +19,12 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow-x: hidden;
 }
 
 body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     width: min(500px, 40vw);
     height: min(500px, 40vw);
     background: rgba(13, 152, 186, 0.15);
@@ -28,11 +33,12 @@ body::before {
     right: -250px;
     animation: float 6s ease-in-out infinite;
     z-index: 0;
+    pointer-events: none;
 }
 
 body::after {
     content: '';
-    position: absolute;
+    position: fixed;
     width: min(400px, 35vw);
     height: min(400px, 35vw);
     background: rgba(94, 129, 172, 0.12);
@@ -41,6 +47,7 @@ body::after {
     left: -200px;
     animation: float 8s ease-in-out infinite reverse;
     z-index: 0;
+    pointer-events: none;
 }
 
 @keyframes float {
@@ -52,7 +59,6 @@ body::after {
     }
 }
 
-/* HEADER */
 .header-principal {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
@@ -147,12 +153,11 @@ body::after {
     height: 18px;
 }
 
-/* CONTENIDO PRINCIPAL */
 .contenido-principal {
-    flex: 1;
     position: relative;
     z-index: 1;
     padding: clamp(30px, 5vw, 60px) 0;
+    flex: 1 0 auto;
 }
 
 .contenedor-contenido {
@@ -174,14 +179,16 @@ body::after {
 
 .bienvenida h2 {
     font-size: clamp(2rem, 4vw, 3rem);
-    color: #1a3a52;
+    color: white;
     margin-bottom: 10px;
     font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .bienvenida p {
     font-size: clamp(1rem, 2vw, 1.2rem);
-    color: #5e81ac;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .grid-contenido {
@@ -210,32 +217,35 @@ body::after {
 
 .tarjeta h3 {
     font-size: clamp(1.3rem, 2.5vw, 1.6rem);
-    color: #1a3a52;
+    color: white;
     margin-bottom: 10px;
     font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .tarjeta p {
-    color: #5e81ac;
+    color: white;
     font-size: clamp(0.95rem, 1.5vw, 1.05rem);
     line-height: 1.5;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* FOOTER */
 .footer-principal {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding: clamp(20px, 3vw, 30px) 0;
-    margin-top: auto;
+    padding: clamp(20px, 3vw, 30px) 0 0 0;
     position: relative;
     z-index: 1;
+    width: 100%;
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 .contenedor-footer {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 clamp(20px, 4vw, 40px);
+    padding: 0 clamp(20px, 4vw, 40px) clamp(20px, 3vw, 30px) clamp(20px, 4vw, 40px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -251,31 +261,6 @@ body::after {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.footer-links {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.footer-links a {
-    color: white;
-    text-decoration: none;
-    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.footer-links a:hover {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: underline;
-}
-
-.footer-links span {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* RESPONSIVE */
 @media (max-width: 968px) {
     .contenedor-header {
         flex-direction: column;
