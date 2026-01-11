@@ -365,6 +365,10 @@ body::after {
     transform: scale(1.05);
 }
 
+.btn-accion:active {
+    transform: scale(0.95);
+}
+
 .btn-agregar-contacto svg {
     color: white;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
@@ -465,6 +469,10 @@ body::after {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: scale(1.05);
+}
+
+.btn-accion:active {
+    transform: scale(0.95);
 }
 
 .btn-accion svg {

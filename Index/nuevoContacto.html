@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDaily - Agregar Contacto</title>
+    <link rel="icon" type="image/x-icon" href="../Images/Icono - Login.png">
+    <link rel="stylesheet" href="../Styles/nuevoContacto.css">
+</head>
+
+<body>
+    <header class="header-principal">
+        <div class="contenedor-header">
+            <div class="logo">
+                <h1>MyDaily</h1>
+            </div>
+
+            <nav class="navegacion">
+                <a href="#inicio" class="nav-link activo">Inicio</a>
+                <a href="#seccion-contactos" class="nav-link">Contactos</a>
+                <a href="#tareas" class="nav-link">Tareas</a>
+                <a href="#perfil" class="nav-link">Perfil</a>
+            </nav>
+
+            <div class="usuario-info">
+                <span class="nombre-usuario" id="nombreUsuario">Usuario</span>
+                <button class="btn-cerrar-sesion" onclick="cerrarSesion()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <section>
+        <div class="container">
+
+            <!-- Sección para agregar o modificar contacto -->
+            <div class="section">
+                <h2>Agregar o Modificar Contacto</h2>
+                <form id="formContacto">
+                    <input type="hidden" id="codigoContacto" name="codigoContacto">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" class="entrada_texto" id="nombreContacto" name="nombreContacto" required>
+                            <label class="label-input">Nombre Completo</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="tel" class="entrada_texto" id="telefonoContacto" name="telefonoContacto"
+                                required>
+                            <label class="label-input">Teléfono</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" class="entrada_texto" id="correoContacto" name="correoContacto"
+                                required>
+                            <label class="label-input">Correo Electrónico</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="entrada_texto" id="direccionContacto" name="direccionContacto"
+                                required>
+                            <label class="label-input">Dirección</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="date" class="entrada_texto" id="fechaRegistro" name="fechaRegistro" required>
+                            <label class="label-input-date">Fecha de Registro</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="file" class="entrada_texto" id="imagenContacto" name="imagenContacto"
+                                accept="image/*">
+                            <label class="label-input">Imagen de Contacto</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="submit" class="btn_crear" id="btnCrear">
+                            <span class="bnt_texto">Crear Contacto</span>
+                            <span class="btn_icono">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </span>
+                        </button>
+
+                        <button type="submit" class="btn_actualizar" id="btnActualizar" style="display: none;">
+                            <span class="bnt_texto">Actualizar</span>
+                            <span class="btn_icono">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sección de búsqueda y listado -->
+            <div class="section">
+                <h2>Lista de Contactos</h2>
+
+                <div class="search-section">
+                    <div class="form-group search-group">
+                        <input type="text" class="entrada_texto search-input" id="buscarContacto" placeholder=" ">
+                        <label class="label-input">Buscar contacto...</label>
+                        <div class="search-icon">
+                            <i class="fa-solid fa-search"></i>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn_eliminar" onclick="limpiarBusqueda()">
+                        <span class="bnt_texto">Cancelar</span>
+                        <span class="btn_icono">
+                            <i class="fa fa-solid fa-x"></i>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Dirección</th>
+                                <th>Fecha Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaContactos">
+                            <!-- Los contactos se cargarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="message warning">
+                    <i class="fa fa-exclamation-triangle"></i>
+                    <strong>¡Atención!</strong> Recuerda que al eliminar un contacto, este se borrará de forma
+                    permanente y no podrás recuperarlo.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-principal">
+        <div class="contenedor-footer">
+            <p>&copy; 2026 MyDaily.</p>
+            <p>Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
