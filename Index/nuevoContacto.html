@@ -101,13 +101,6 @@
                                 <i class="fa-solid fa-user-plus"></i>
                             </span>
                         </button>
-
-                        <button type="submit" class="btn_actualizar" id="btnActualizar" style="display: none;">
-                            <span class="bnt_texto">Actualizar Contacto</span>
-                            <span class="btn_icono">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </span>
-                        </button>
                     </div>
                 </form>
             </div>
@@ -122,26 +115,7 @@
     </footer>
 
     <script src="../Scripts/datosUsuario.js"></script>
-    <script>
-        // Preview de imagen
-        document.getElementById('imagenContacto').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('preview-imagen').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        function cerrarSesion() {
-            if(confirm('¿Estás seguro que deseas cerrar sesión?')) {
-                alert('Sesión cerrada');
-            }
-        }
-    </script>
-    
+    <script src="../Scripts/nuevoContacto.js"></script>
 </body>
 
 </html>

@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // FUNCIÓN PARA MOSTRAR MENSAJES CON MODAL
 
-function mostrarMensaje(mensaje, tipo = 'error') {
+function mostrarMensaje(mensaje) {
     // Crear overlay oscuro
     const overlay = document.createElement('div');
     overlay.style.cssText = `
@@ -104,12 +104,9 @@ function mostrarMensaje(mensaje, tipo = 'error') {
         animation: slideUp 0.3s ease-out;
     `;
     
-    // Icono según el tipo
-    const icono = tipo === 'error' ? '❌' : '✅';
-    
     // Contenido del modal
     modal.innerHTML = `
-        <div style="font-size: 50px; margin-bottom: 15px;">${icono}</div>
+        <div style="font-size: 50px; margin-bottom: 15px;">👻</div>
         <p style="color: #1a3a52; font-size: 16px; margin-bottom: 25px; line-height: 1.5; font-weight: 500;">
             ${mensaje}
         </p>
@@ -205,17 +202,17 @@ formularioRegistro.addEventListener('submit', function(e) {
     
     // Validaciones
     if (!correo || !contrasena || !confirmarContrasena) {
-        mostrarMensaje('Por favor completa todos los campos', 'error');
+        mostrarMensaje('Por favor completa todos los campos');
         return;
     }
     
     if (contrasena !== confirmarContrasena) {
-        mostrarMensaje('Las contraseñas no coinciden', 'error');
+        mostrarMensaje('Las contraseñas no coinciden');
         return;
     }
     
     if (contrasena.length < 6) {
-        mostrarMensaje('La contraseña debe tener al menos 6 caracteres', 'error');
+        mostrarMensaje('La contraseña debe tener al menos 6 caracteres');
         return;
     }
     
@@ -224,7 +221,7 @@ formularioRegistro.addEventListener('submit', function(e) {
     const usuarioExiste = usuarios.find(u => u.correo === correo);
     
     if (usuarioExiste) {
-        mostrarMensaje('Este correo ya está registrado', 'error');
+        mostrarMensaje('Este correo ya está registrado');
         return;
     }
     
@@ -238,7 +235,7 @@ formularioRegistro.addEventListener('submit', function(e) {
     usuarios.push(nuevoUsuario);
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     
-    mostrarMensaje('¡Registro exitoso! Ahora puedes iniciar sesión', 'success');
+    mostrarMensaje('¡Registro exitoso! Ahora puedes iniciar sesión');
     
     // Limpiar formulario
     formularioRegistro.reset();
@@ -262,7 +259,7 @@ formularioLogin.addEventListener('submit', function(e) {
     
     // Validaciones básicas
     if (!correo || !contrasena) {
-        mostrarMensaje('Por favor completa todos los campos', 'error');
+        mostrarMensaje('Por favor completa todos los campos');
         return;
     }
     
@@ -271,12 +268,12 @@ formularioLogin.addEventListener('submit', function(e) {
     const usuario = usuarios.find(u => u.correo === correo && u.contrasena === contrasena);
     
     if (!usuario) {
-        mostrarMensaje('Correo o contraseña incorrectos', 'error');
+        mostrarMensaje('Correo o contraseña incorrectos');
         return;
     }
     
     // Login exitoso
-    mostrarMensaje('¡Bienvenido a MyDaily!', 'success');
+    mostrarMensaje('¡Bienvenido a MyDaily!');
     
     // Guardar sesión actual
     const sesionActual = {

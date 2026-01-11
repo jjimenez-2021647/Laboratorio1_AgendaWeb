@@ -17,9 +17,9 @@
             </div>
 
             <nav class="navegacion">
-                <a href="#inicio" class="nav-link activo">Inicio</a>
-                <a href="#seccion-contactos" class="nav-link">Contactos</a>
-                <a href="favoritos.html" class="nav-link">Favoritos</a>
+                <a href="#principal.html" class="nav-link">Inicio</a>
+                <a href="principal.html#seccion-contactos" class="nav-link">Contactos</a>
+                <a href="favoritos.html" class="nav-link activo">Favoritos</a>
                 <a href="#tareas" class="nav-link">Tareas</a>
                 <a href="#perfil" class="nav-link">Perfil</a>
             </nav>
@@ -42,34 +42,10 @@
         <div class="contenedor-contenido">
             <section class="seccion-contactos">
 
-                <!-- 
-            <section class="bienvenida">
-                <h2 id="mensajeBienvenida">¡Bienvenido de nuevo!</h2>
-                <p>Gestiona tu día de manera eficiente</p>
-            </section>
-
-            Tarjetas de acceso rápido
-            <div class="grid-contenido">
-                <div class="tarjeta">
-                    <h3>Tus Contactos</h3>
-                    <p>Administra tu lista de contactos</p>
-                </div>
-                
-                <div class="tarjeta">
-                    <h3>Tus Tareas</h3>
-                    <p>Organiza tus pendientes del día</p>
-                </div>
-                
-                <div class="tarjeta">
-                    <h3>Tu Perfil</h3>
-                    <p>Actualiza tu información personal</p>
-                </div>
-            </div> -->
-
                 <div class="titulo-seccion">
                     <div class="titulo-texto">
-                        <h2>Mis Contactos</h2>
-                        <p>Lista de contactos guardados</p>
+                        <h2>Mis Contactos - Favoritos</h2>
+                        <p>Lista de contactos favoritos</p>
                     </div>
                     <button class="btn-agregar-contacto" title="Agregar contacto"
                         onclick="window.location.href='nuevoContacto.html'">
@@ -126,72 +102,12 @@
 
                     <div class="contacto-item">
                         <div class="contacto-avatar">
-                            <img src="../Images/Contacto3.jpg" alt="Ana de Armas" class="foto-contacto">
-                        </div>
-                        <div class="contacto-info">
-                            <h3 class="contacto-nombre">Ana de Armas</h3>
-                            <p class="contacto-telefono">+502 3456-7890</p>
-                            <p class="contacto-email">ana.armas@gmail.com</p>
-                        </div>
-                        <div class="contacto-acciones">
-                            <button class="btn-accion" title="Ver detalles">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="contacto-item">
-                        <div class="contacto-avatar">
                             <img src="../Images/contacto4.jpg" alt="Roberto Rodriguez" class="foto-contacto">
                         </div>
                         <div class="contacto-info">
                             <h3 class="contacto-nombre">Roberto Rodriguez</h3>
                             <p class="contacto-telefono">+502 4567-8901</p>
                             <p class="contacto-email">roberto.rodriguez@gmail.com</p>
-                        </div>
-                        <div class="contacto-acciones">
-                            <button class="btn-accion" title="Ver detalles">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="contacto-item">
-                        <div class="contacto-avatar">
-                            <img src="../Images/Contacto5.jpg" alt="Emma Myers" class="foto-contacto">
-                        </div>
-                        <div class="contacto-info">
-                            <h3 class="contacto-nombre">Emma Myers</h3>
-                            <p class="contacto-telefono">+502 5678-9012</p>
-                            <p class="contacto-email">emma.myers@gmail.com</p>
-                        </div>
-                        <div class="contacto-acciones">
-                            <button class="btn-accion" title="Ver detalles">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="contacto-item">
-                        <div class="contacto-avatar">
-                            <img src="../Images/contacto6.jpg" alt="Rhandy Caná" class="foto-contacto">
-                        </div>
-                        <div class="contacto-info">
-                            <h3 class="contacto-nombre">Rhandy Caná</h3>
-                            <p class="contacto-telefono">+502 6789-0123</p>
-                            <p class="contacto-email">rhandy.cana@gmail.com</p>
                         </div>
                         <div class="contacto-acciones">
                             <button class="btn-accion" title="Ver detalles">
@@ -294,7 +210,7 @@
     </div>
 
     <script src="../Scripts/datosUsuario.js"></script>
-    <script src="../Scripts/principal.js"></script>
+    <script src="../Scripts/favoritos.js"></script>
     <script src="../Scripts/detalleContacto.js"></script>
 </body>
 
