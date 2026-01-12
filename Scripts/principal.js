@@ -23,19 +23,22 @@ function cargarDatosUsuario() {
         const usuario = usuarios.find(u => u.correo === sesionActual.correo);
         
         if (usuario) {
+            // Construir nombre completo
+            const nombreBase = usuario.nombre || usuario.correo.split('@')[0];
+            const apellidoBase = usuario.apellido || '';
+            const nombreCompleto = `${nombreBase} ${apellidoBase}`.trim();
+            const nombreFormateado =
+                nombreCompleto.charAt(0).toUpperCase() + nombreCompleto.slice(1);
+
             // Actualizar nombre de usuario en el header
             const nombreUsuario = document.getElementById('nombreUsuario');
             if (nombreUsuario) {
-                // Extraer nombre del correo si no existe nombre
-                const nombre = usuario.nombre || usuario.correo.split('@')[0];
-                nombreUsuario.textContent = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+                nombreUsuario.textContent = nombreFormateado;
             }
             
             // Actualizar mensaje de bienvenida
             const mensajeBienvenida = document.getElementById('mensajeBienvenida');
             if (mensajeBienvenida) {
-                const nombre = usuario.nombre || usuario.correo.split('@')[0];
-                const nombreFormateado = nombre.charAt(0).toUpperCase() + nombre.slice(1);
                 mensajeBienvenida.textContent = `¡Bienvenido de nuevo, ${nombreFormateado}!`;
             }
         }

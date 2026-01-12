@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDaily - Tareas</title>
+    <link rel="icon" type="image/x-icon" href="../Images/Icono - Login.png">
+    <link rel="stylesheet" href="../Styles/tareas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header-principal">
+        <div class="contenedor-header">
+            <div class="logo">
+                <h1>MyDaily</h1>
+            </div>
+
+            <nav class="navegacion">
+                <a href="principal.html" class="nav-link">Inicio</a>
+                <a href="principal.html#seccion-contactos" class="nav-link">Contactos</a>
+                <a href="favoritos.html" class="nav-link">Favoritos</a>
+                <a href="tareas.html" class="nav-link activo">Lista de Tareas</a>
+                <a href="perfilUsuario.html" class="nav-link">Perfil</a>
+            </nav>
+
+            <div class="usuario-info">
+                <span class="nombre-usuario" id="nombreUsuario">Usuario</span>
+                <button class="btn-cerrar-sesion" onclick="cerrarSesion()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="contenido-principal">
+        <div class="contenedor-contenido">
+            <section class="seccion-contactos">
+                <div class="titulo-seccion">
+                    <div class="titulo-texto">
+                        <h2>Mis Tareas</h2>
+                        <p>Lista de tareas pendientes</p>
+                    </div>
+                    <button class="btn-agregar-contacto" title="Agregar tarea" onclick="abrirModalAgregar()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="lista-contactos" id="listaTareas">
+                    <!-- Las tareas se cargarán dinámicamente aquí -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer-principal">
+        <div class="contenedor-footer">
+            <p>&copy; 2026 MyDaily.</p>
+            <p>Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para Ver/Editar/Agregar Tarea -->
+    <div id="modalTarea" class="modal-overlay" style="display: none;">
+        <div class="modal-contenido">
+            <button class="btn-cerrar-modal" onclick="cerrarModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <h2 id="tituloModal">Detalles de la Tarea</h2>
+
+            <!-- Formulario de Tarea -->
+            <form id="formTarea">
+                <!-- Datos de la tarea -->
+                <div class="contenedor-inputs">
+                    <div class="form-group">
+                        <input type="text" class="entrada_texto" id="nombreTarea" required>
+                        <label class="label-input" id="label-nombre">Nombre de la Tarea</label>
+                    </div>
+
+                    <div class="form-group form-group-textarea">
+                        <textarea class="entrada_texto entrada_textarea" id="descripcionTarea" rows="3" required></textarea>
+                        <label class="label-input" id="label-descripcion">Descripción</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select class="entrada_texto entrada_select" id="prioridadTarea" required>
+                            <option value="" disabled selected>Elegir una opción</option> 
+                            <option value="urgente">🔴 Urgente</option>
+                            <option value="normal">🟡 Normal</option>
+                            <option value="baja">🟢 Baja</option>
+                        </select>
+                        <label class="label-input label-select" id="label-prioridad">Prioridad</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select class="entrada_texto entrada_select" id="estadoTarea" required>
+                            <option value="" disabled selected>Elegir una opción</option>
+                            <option value="pendiente">⏳ Pendiente</option>
+                            <option value="completada">✅ Completada</option>
+                        </select>
+                        <label class="label-input label-select" id="label-estado">Estado</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-input-date">Fecha de Inicio</label>
+                        <input type="date" class="entrada_texto" id="fechaInicio" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-input-date">Fecha de Fin</label>
+                        <input type="date" class="entrada_texto" id="fechaFin" required>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="contenedor-botones-modal" id="botonesModal">
+                    <!-- Los botones cambiarán dinámicamente según el modo -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../Scripts/principal.js"></script>
+    <script src="../Scripts/tareas.js"></script>
+</body>
+
+</html>

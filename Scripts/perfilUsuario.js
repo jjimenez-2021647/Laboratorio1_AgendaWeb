@@ -1,9 +1,9 @@
 // Verificar sesión al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     verificarSesion();
     cargarDatosUsuario();
     configurarFormulario();
-    
+
     // Agregar iconos de ojo a campos de contraseña
     const camposPassword = document.querySelectorAll('input[type="password"]');
     camposPassword.forEach(input => crearIconoOjo(input));
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Verificar si hay sesión activa
 function verificarSesion() {
     const sesion = sessionStorage.getItem('sesionActual');
-    
+
     if (!sesion) {
         // Si no hay sesión, redirigir al login
         window.location.href = '../index.html';
@@ -22,19 +22,23 @@ function verificarSesion() {
 // Cargar datos del usuario en el formulario
 function cargarDatosUsuario() {
     const sesionActual = JSON.parse(sessionStorage.getItem('sesionActual'));
-    
+
     if (sesionActual) {
         const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
         const usuario = usuarios.find(u => u.correo === sesionActual.correo);
-        
+
         if (usuario) {
             // Actualizar nombre de usuario en el header
             const nombreUsuario = document.getElementById('nombreUsuario');
             if (nombreUsuario) {
-                const nombre = usuario.nombre || usuario.correo.split('@')[0];
-                nombreUsuario.textContent = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+                const nombreBase = usuario.nombre || usuario.correo.split('@')[0];
+                const apellidoBase = usuario.apellido || '';
+                const nombreCompleto = `${nombreBase} ${apellidoBase}`.trim();
+                nombreUsuario.textContent =
+                    nombreCompleto.charAt(0).toUpperCase() + nombreCompleto.slice(1);
             }
-            
+
+
             // CARGAR DATOS EN EL FORMULARIO
             document.getElementById('nombreContacto').value = usuario.nombre || '';
             document.getElementById('apellidoContacto').value = usuario.apellido || '';
@@ -43,7 +47,7 @@ function cargarDatosUsuario() {
             document.getElementById('passwordContacto').value = usuario.contrasena || '';
             document.getElementById('direccionContacto').value = usuario.direccion || '';
             document.getElementById('fechaRegistro').value = usuario.fechaRegistro ? usuario.fechaRegistro.split('T')[0] : '';
-            
+
             // Cargar imagen: si existe usa la del usuario, si no usa la por defecto
             const imagenPerfil = document.getElementById('preview-imagen');
             if (usuario.imagen && usuario.imagen !== '../Images/Perfil.jpg') {
@@ -59,20 +63,20 @@ function cargarDatosUsuario() {
 function configurarFormulario() {
     const formulario = document.getElementById('formContacto');
     const btnCrear = document.getElementById('btnCrear');
-    
+
     // Cambiar texto del botón a "Actualizar Perfil"
     btnCrear.querySelector('.bnt_texto').textContent = 'Actualizar Perfil';
     btnCrear.querySelector('.btn_icono i').className = 'fa-solid fa-user-pen';
-    
+
     // Manejar envío del formulario
-    formulario.addEventListener('submit', function(e) {
+    formulario.addEventListener('submit', function (e) {
         e.preventDefault();
         actualizarPerfil();
     });
-    
+
     // Manejar cambio de imagen
     const inputImagen = document.getElementById('imagenContacto');
-    inputImagen.addEventListener('change', function(e) {
+    inputImagen.addEventListener('change', function (e) {
         const file = e.target.files[0];
         if (file) {
             // Validar tamaño de archivo (máximo 2MB)
@@ -80,15 +84,15 @@ function configurarFormulario() {
                 mostrarMensaje('La imagen no puede superar los 2MB');
                 return;
             }
-            
+
             // Validar tipo de archivo
             if (!file.type.startsWith('image/')) {
                 mostrarMensaje('Por favor selecciona un archivo de imagen válido');
                 return;
             }
-            
+
             const reader = new FileReader();
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 document.getElementById('preview-imagen').src = event.target.result;
             };
             reader.readAsDataURL(file);
@@ -99,12 +103,12 @@ function configurarFormulario() {
 // Actualizar perfil del usuario
 function actualizarPerfil() {
     const sesionActual = JSON.parse(sessionStorage.getItem('sesionActual'));
-    
+
     if (!sesionActual) {
         mostrarMensaje('Error: No hay sesión activa');
         return;
     }
-    
+
     // Obtener datos del formulario
     const nombre = document.getElementById('nombreContacto').value.trim();
     const apellido = document.getElementById('apellidoContacto').value.trim();
@@ -114,27 +118,27 @@ function actualizarPerfil() {
     const direccion = document.getElementById('direccionContacto').value.trim();
     const fechaRegistro = document.getElementById('fechaRegistro').value;
     const imagen = document.getElementById('preview-imagen').src;
-    
+
     // Validaciones
     if (!nombre || !apellido || !correo || !nuevaContrasena) {
         mostrarMensaje('Por favor completa todos los campos obligatorios');
         return;
     }
-    
+
     if (nuevaContrasena.length < 6) {
         mostrarMensaje('La contraseña debe tener al menos 6 caracteres');
         return;
     }
-    
+
     // Obtener usuarios del localStorage
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
     const indiceUsuario = usuarios.findIndex(u => u.correo === sesionActual.correo);
-    
+
     if (indiceUsuario === -1) {
         mostrarMensaje('Error: Usuario no encontrado');
         return;
     }
-    
+
     // Verificar si el nuevo correo ya existe (si se cambió)
     if (correo !== sesionActual.correo) {
         const correoExiste = usuarios.some((u, index) => u.correo === correo && index !== indiceUsuario);
@@ -143,7 +147,7 @@ function actualizarPerfil() {
             return;
         }
     }
-    
+
     // Actualizar datos del usuario
     usuarios[indiceUsuario] = {
         ...usuarios[indiceUsuario],
@@ -157,10 +161,10 @@ function actualizarPerfil() {
         imagen: imagen,
         fechaActualizacion: new Date().toISOString()
     };
-    
+
     // Guardar en localStorage
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
-    
+
     // Actualizar sesión si cambió el correo
     if (correo !== sesionActual.correo) {
         sessionStorage.setItem('sesionActual', JSON.stringify({
@@ -168,7 +172,7 @@ function actualizarPerfil() {
             fechaLogin: sesionActual.fechaLogin
         }));
     }
-    
+
     // Actualizar "Recordarme" si existe
     const recordarUsuario = JSON.parse(localStorage.getItem('recordarUsuario') || 'null');
     if (recordarUsuario && recordarUsuario.correo === sesionActual.correo) {
@@ -177,25 +181,27 @@ function actualizarPerfil() {
             contrasena: nuevaContrasena
         }));
     }
-    
+
     mostrarMensaje('Perfil actualizado exitosamente');
-    
+
     // Actualizar el nombre en el header
     const nombreUsuario = document.getElementById('nombreUsuario');
     if (nombreUsuario) {
-        nombreUsuario.textContent = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+        const nombreCompleto = `${nombre} ${apellido}`.trim();
+        nombreUsuario.textContent =
+            nombreCompleto.charAt(0).toUpperCase() + nombreCompleto.slice(1);
     }
 }
 
 // FUNCIONALIDAD DE VER/OCULTAR CONTRASEÑAS
 function crearIconoOjo(inputPassword) {
     const contenedor = inputPassword.parentElement;
-    
+
     // Crear botón para el icono
     const btnToggle = document.createElement('button');
     btnToggle.type = 'button';
     btnToggle.className = 'toggle-password';
-    
+
     // SVG del ojo abierto (contraseña oculta)
     const ojoAbierto = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -203,7 +209,7 @@ function crearIconoOjo(inputPassword) {
             <circle cx="12" cy="12" r="3"></circle>
         </svg>
     `;
-    
+
     // SVG del ojo cerrado (contraseña visible)
     const ojoCerrado = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -211,14 +217,14 @@ function crearIconoOjo(inputPassword) {
             <line x1="1" y1="1" x2="23" y2="23"></line>
         </svg>
     `;
-    
+
     btnToggle.innerHTML = ojoAbierto;
-    
+
     // Toggle para mostrar/ocultar contraseña
     btnToggle.addEventListener('click', () => {
         const tipo = inputPassword.type === 'password' ? 'text' : 'password';
         inputPassword.type = tipo;
-        
+
         // Cambiar icono
         if (tipo === 'text') {
             btnToggle.innerHTML = ojoCerrado;
@@ -226,7 +232,7 @@ function crearIconoOjo(inputPassword) {
             btnToggle.innerHTML = ojoAbierto;
         }
     });
-    
+
     contenedor.appendChild(btnToggle);
 }
 
@@ -247,7 +253,7 @@ function mostrarMensaje(mensaje) {
         align-items: center;
         animation: fadeIn 0.3s ease-out;
     `;
-    
+
     // Crear modal
     const modal = document.createElement('div');
     modal.style.cssText = `
@@ -260,7 +266,7 @@ function mostrarMensaje(mensaje) {
         text-align: center;
         animation: slideUp 0.3s ease-out;
     `;
-    
+
     // Contenido del modal - SIEMPRE CON FANTASMA 👻
     modal.innerHTML = `
         <div style="font-size: 50px; margin-bottom: 15px;">👻</div>
@@ -282,29 +288,29 @@ function mostrarMensaje(mensaje) {
             Aceptar
         </button>
     `;
-    
+
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-    
+
     // Efecto hover en el botón
     const btnAceptar = document.getElementById('btnAceptarMensaje');
-    btnAceptar.addEventListener('mouseenter', function() {
+    btnAceptar.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-2px)';
         this.style.boxShadow = '0 6px 15px rgba(9, 154, 161, 0.4)';
     });
-    
-    btnAceptar.addEventListener('mouseleave', function() {
+
+    btnAceptar.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = '0 4px 10px rgba(9, 154, 161, 0.3)';
     });
-    
+
     // Cerrar modal
-    btnAceptar.addEventListener('click', function() {
+    btnAceptar.addEventListener('click', function () {
         overlay.style.animation = 'fadeOut 0.3s ease-out';
         setTimeout(() => overlay.remove(), 300);
     });
-    
-    overlay.addEventListener('click', function(e) {
+
+    overlay.addEventListener('click', function (e) {
         if (e.target === overlay) {
             overlay.style.animation = 'fadeOut 0.3s ease-out';
             setTimeout(() => overlay.remove(), 300);
@@ -342,10 +348,10 @@ if (!document.querySelector('#mensaje-styles')) {
 // Función para cerrar sesión
 function cerrarSesion(mantenerRecordarme = true) {
     sessionStorage.removeItem('sesionActual');
-    
+
     if (!mantenerRecordarme) {
         localStorage.removeItem('recordarUsuario');
     }
-    
+
     window.location.href = '../index.html';
 }
