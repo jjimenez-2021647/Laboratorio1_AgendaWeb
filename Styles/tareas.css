@@ -249,8 +249,8 @@ body::after {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    position: absolute;
-    right: clamp(25px, 3vw, 30px);
+    width: 50px;
+    height: 50px;
 }
 
 .btn-agregar-contacto:hover {
@@ -348,6 +348,19 @@ body::after {
 .btn-accion svg {
     color: white;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Estilos para iconos SVG en tareas */
+.icon-svg {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+option .icon-svg {
+    margin-right: 8px;
 }
 
 /* Modal de Detalles */
@@ -483,7 +496,7 @@ body::after {
 .entrada_texto:read-only,
 .entrada_texto:disabled {
     cursor: default;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.10);
 }
 
 /* Label flotante - Estado inicial (dentro del input) */
@@ -530,14 +543,24 @@ body::after {
     transform: translateY(-50%);
 }
 
-/* Para selects */
-.entrada_select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    cursor: pointer;
-    padding-right: 40px;
+/* Para las opciones del select cuando se despliega */
+.entrada_select option {
+    background-color: rgb(5, 115, 125) !important;
+    color: white !important;
+    padding: 10px;
+}
+
+/* Para la opción seleccionada o en hover */
+.entrada_select option:checked,
+.entrada_select option:hover {
+    background-color: rgb(3, 85, 95) !important;
+    color: white !important;
+}
+
+/* Específicamente para el hover */
+.entrada_select option:hover {
+    background: rgb(3, 85, 95) !important;
+    background-color: rgb(3, 85, 95) !important;
 }
 
 .label-select {
@@ -772,5 +795,193 @@ input[type="date"].entrada_texto {
     .btn-accion {
         width: 100%;
         padding: 12px;
+    }
+}
+
+/* ========================================== */
+/* ESTILOS ADICIONALES PARA FILTROS */
+/* ========================================== */
+
+/* Contenedor de botones en el header */
+.botones-accion-header {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Botón de filtrar */
+.btn-filtrar-tareas {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.btn-filtrar-tareas:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.btn-filtrar-tareas:active {
+    transform: scale(0.95);
+}
+
+.btn-filtrar-tareas svg {
+    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Estado activo del botón de filtros */
+.btn-filtrar-tareas.activo {
+    background: rgba(13, 152, 186, 0.4);
+    border-color: rgba(13, 152, 186, 0.6);
+    box-shadow: 0 0 15px rgba(13, 152, 186, 0.4);
+}
+
+/* Grupos de filtros en el modal */
+.filtros-grupo {
+    margin-bottom: 25px;
+}
+
+.filtros-grupo h3 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.filtros-opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Opciones individuales de filtro */
+.filtro-opcion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filtro-opcion:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(5px);
+}
+
+.filtro-opcion input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #0d98ba;
+    flex-shrink: 0;
+}
+
+.filtro-opcion label {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones del modal de filtros */
+.botones-filtro {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-aplicar-filtros,
+.btn-limpiar-filtros {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-aplicar-filtros {
+    background: rgba(13, 152, 186, 0.6);
+    color: white;
+    border: 2px solid rgba(13, 152, 186, 0.8);
+}
+
+.btn-aplicar-filtros:hover {
+    background: rgba(13, 152, 186, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(13, 152, 186, 0.4);
+}
+
+.btn-limpiar-filtros {
+    background: rgba(220, 53, 69, 0.6);
+    color: white;
+    border: 2px solid rgba(220, 53, 69, 0.8);
+}
+
+.btn-limpiar-filtros:hover {
+    background: rgba(220, 53, 69, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.4);
+}
+
+.btn-aplicar-filtros:active,
+.btn-limpiar-filtros:active {
+    transform: translateY(0);
+}
+
+/* Responsive para filtros */
+@media (max-width: 768px) {
+    .botones-accion-header {
+        width: auto;
+        justify-content: center;
+    }
+
+    .botones-filtro {
+        flex-direction: column;
+    }
+
+    .btn-aplicar-filtros,
+    .btn-limpiar-filtros {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-filtrar-tareas,
+    .btn-agregar-contacto {
+        width: 45px;
+        height: 45px;
+        padding: 10px;
+    }
+
+    .filtro-opcion {
+        padding: 10px 12px;
+    }
+
+    .filtros-grupo h3 {
+        font-size: 1rem;
     }
 }

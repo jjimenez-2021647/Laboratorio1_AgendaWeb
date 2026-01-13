@@ -508,12 +508,10 @@ input[type="date"].entrada_texto::-webkit-calendar-picker-indicator {
     }
 }
 
-/* Estilos para el botón de mostrar/ocultar contraseña */
-/* Estilos para el botón de mostrar/ocultar contraseña */
 .toggle-password {
     position: absolute;
     right: 15px;
-    top: 50%;
+    top: 54%;
     transform: translateY(-50%);
     background: none;
     border: none;

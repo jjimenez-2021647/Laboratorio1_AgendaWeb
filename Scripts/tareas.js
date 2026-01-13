@@ -49,6 +49,13 @@ if (!document.querySelector('#mensaje-styles')) {
             font-size: 0.85rem !important;
             background: rgba(13, 152, 186, 0.8) !important;
         }
+        .icon-svg {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
     `;
     document.head.appendChild(style);
 }
@@ -313,8 +320,8 @@ function obtenerTextoPrioridad(prioridad) {
 
 function obtenerTextoEstado(estado) {
     switch (estado) {
-        case 'pendiente': return '⏳ Pendiente';
-        case 'completada': return '✅ Completada';
+        case 'pendiente': return '🕐 Pendiente';
+        case 'completada': return '✔ Completada';
         default: return estado;
     }
 }
@@ -579,73 +586,28 @@ document.getElementById('formTarea')?.addEventListener('submit', function (e) {
     }
 });
 
-// ========== CARGAR Y RENDERIZAR TAREAS ==========
+// ========== SISTEMA DE FILTROS ==========
 
-function cargarTareas() {
-    const tareas = obtenerTareas();
-    const listaTareas = document.getElementById('listaTareas');
+// Variable para almacenar filtros activos
+let filtrosActivos = {
+    prioridades: [],
+    estados: []
+};
 
-    if (!listaTareas) return;
-
-    listaTareas.innerHTML = '';
-
-    if (tareas.length === 0) {
-        listaTareas.innerHTML = `
-            <div style="
-                text-align: center; 
-                padding: 40px; 
-                background: rgba(255, 255, 255, 0.15);
-                backdrop-filter: blur(20px);
-                border-radius: 15px;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-            ">
-                <p style="color: white; font-size: 1.2rem; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
-                    No hay tareas guardadas. ¡Agrega tu primera tarea!
-                </p>
-            </div>
-        `;
-        return;
-    }
-
-    tareas.forEach(tarea => {
-        const tareaHTML = `
-            <div class="contacto-item" data-id="${tarea.id}" 
-                 style="background: ${obtenerColorPrioridad(tarea.prioridad)}; border: ${obtenerBordePrioridad(tarea.prioridad)};">
-                <div class="contacto-info">
-                    <h3 class="contacto-nombre">${tarea.nombre}</h3>
-                    <p class="contacto-telefono">${tarea.descripcion}</p>
-                    <p class="contacto-email">${obtenerTextoPrioridad(tarea.prioridad)} - ${obtenerTextoEstado(tarea.estado)}</p>
-                </div>
-                <div class="contacto-acciones">
-                    <button class="btn-accion btn-ver-tarea" title="Ver detalles" data-id="${tarea.id}">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        `;
-
-        listaTareas.insertAdjacentHTML('beforeend', tareaHTML);
-    });
-
-    document.querySelectorAll('.btn-ver-tarea').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const tareaId = this.getAttribute('data-id');
-            const tarea = obtenerTareaPorId(tareaId);
-
-            if (tarea) {
-                abrirModalVer(tarea);
-            }
-        });
-    });
+// Abrir modal de filtros
+function abrirModalFiltros() {
+    const modal = document.getElementById('modalFiltros');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    // Restaurar los filtros previamente seleccionados
+    restaurarFiltrosSeleccionados();
 }
 
-// Cerrar modal al hacer clic fuera
-document.getElementById('modalTarea')?.addEventListener('click', function (e) {
+// Cerrar modal de filtros al hacer clic fuera
+document.getElementById('modalFiltros')?.addEventListener('click', function (e) {
     if (e.target === this) {
-        cerrarModal();
+        cerrarModalFiltros();
     }
 });
 
@@ -711,3 +673,200 @@ window.abrirModalAgregar = abrirModalAgregar;
 window.habilitarEdicion = habilitarEdicion;
 window.eliminarTarea = eliminarTarea;
 window.cerrarSesion = cerrarSesion;
+window.abrirModalFiltros = abrirModalFiltros;
+window.cerrarModalFiltros = cerrarModalFiltros;
+window.aplicarFiltros = aplicarFiltros;
+window.limpiarFiltros = limpiarFiltros;
+function cerrarModalFiltros() {
+    const modal = document.getElementById('modalFiltros');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Restaurar los checkboxes según los filtros activos
+function restaurarFiltrosSeleccionados() {
+    // Limpiar todos los checkboxes primero
+    document.querySelectorAll('#modalFiltros input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Marcar los filtros activos
+    filtrosActivos.prioridades.forEach(prioridad => {
+        const checkbox = document.getElementById(`filtro-${prioridad}`);
+        if (checkbox) checkbox.checked = true;
+    });
+    
+    filtrosActivos.estados.forEach(estado => {
+        const checkbox = document.getElementById(`filtro-${estado}`);
+        if (checkbox) checkbox.checked = true;
+    });
+}
+
+// Aplicar filtros
+function aplicarFiltros() {
+    // Obtener prioridades seleccionadas
+    const prioridades = [];
+    ['urgente', 'normal', 'baja'].forEach(prioridad => {
+        const checkbox = document.getElementById(`filtro-${prioridad}`);
+        if (checkbox && checkbox.checked) {
+            prioridades.push(prioridad);
+        }
+    });
+    
+    // Obtener estados seleccionados
+    const estados = [];
+    ['pendiente', 'completada'].forEach(estado => {
+        const checkbox = document.getElementById(`filtro-${estado}`);
+        if (checkbox && checkbox.checked) {
+            estados.push(estado);
+        }
+    });
+    
+    // Guardar filtros activos
+    filtrosActivos.prioridades = prioridades;
+    filtrosActivos.estados = estados;
+    
+    // Actualizar estado visual del botón de filtros
+    actualizarBotonFiltros();
+    
+    // Aplicar filtros y recargar tareas
+    cargarTareas();
+    
+    // Cerrar modal
+    cerrarModalFiltros();
+    
+    // Mostrar mensaje si hay filtros aplicados
+    if (prioridades.length > 0 || estados.length > 0) {
+        mostrarMensaje('Filtros aplicados correctamente');
+    }
+}
+
+// Limpiar todos los filtros
+function limpiarFiltros() {
+    // Desmarcar todos los checkboxes
+    document.querySelectorAll('#modalFiltros input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Limpiar filtros activos
+    filtrosActivos.prioridades = [];
+    filtrosActivos.estados = [];
+    
+    // Actualizar estado visual del botón de filtros
+    actualizarBotonFiltros();
+    
+    // Recargar todas las tareas sin filtros
+    cargarTareas();
+    
+    // Cerrar modal
+    cerrarModalFiltros();
+    
+    mostrarMensaje('Filtros eliminados');
+}
+
+// Actualizar apariencia del botón de filtros
+function actualizarBotonFiltros() {
+    const btnFiltrar = document.getElementById('btnFiltrarTareas');
+    
+    if (filtrosActivos.prioridades.length > 0 || filtrosActivos.estados.length > 0) {
+        btnFiltrar.classList.add('activo');
+    } else {
+        btnFiltrar.classList.remove('activo');
+    }
+}
+
+// Filtrar tareas según los criterios activos
+function filtrarTareas(tareas) {
+    if (filtrosActivos.prioridades.length === 0 && filtrosActivos.estados.length === 0) {
+        return tareas; // Sin filtros, devolver todas
+    }
+    
+    return tareas.filter(tarea => {
+        let cumplePrioridad = filtrosActivos.prioridades.length === 0 || 
+                              filtrosActivos.prioridades.includes(tarea.prioridad);
+        
+        let cumpleEstado = filtrosActivos.estados.length === 0 || 
+                          filtrosActivos.estados.includes(tarea.estado);
+        
+        return cumplePrioridad && cumpleEstado;
+    });
+}
+
+// ========== CARGAR Y RENDERIZAR TAREAS (MODIFICADA CON FILTROS) ==========
+
+function cargarTareas() {
+    let tareas = obtenerTareas();
+    const listaTareas = document.getElementById('listaTareas');
+
+    if (!listaTareas) return;
+
+    // Aplicar filtros
+    tareas = filtrarTareas(tareas);
+
+    listaTareas.innerHTML = '';
+
+    if (tareas.length === 0) {
+        const mensajeVacio = filtrosActivos.prioridades.length > 0 || filtrosActivos.estados.length > 0
+            ? 'No hay tareas que coincidan con los filtros seleccionados'
+            : 'No hay tareas guardadas. ¡Agrega tu primera tarea!';
+        
+        listaTareas.innerHTML = `
+            <div style="
+                text-align: center; 
+                padding: 40px; 
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(20px);
+                border-radius: 15px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            ">
+                <p style="color: white; font-size: 1.2rem; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
+                    ${mensajeVacio}
+                </p>
+            </div>
+        `;
+        return;
+    }
+
+    tareas.forEach(tarea => {
+        const tareaHTML = `
+            <div class="contacto-item" data-id="${tarea.id}" 
+                 style="background: ${obtenerColorPrioridad(tarea.prioridad)}; border: ${obtenerBordePrioridad(tarea.prioridad)};">
+                <div class="contacto-info">
+                    <h3 class="contacto-nombre">${tarea.nombre}</h3>
+                    <p class="contacto-telefono">${tarea.descripcion}</p>
+                    <p class="contacto-email">${obtenerTextoPrioridad(tarea.prioridad)} - ${obtenerTextoEstado(tarea.estado)}</p>
+                </div>
+                <div class="contacto-acciones">
+                    <button class="btn-accion btn-ver-tarea" title="Ver detalles" data-id="${tarea.id}">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        listaTareas.insertAdjacentHTML('beforeend', tareaHTML);
+    });
+
+    document.querySelectorAll('.btn-ver-tarea').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const tareaId = this.getAttribute('data-id');
+            const tarea = obtenerTareaPorId(tareaId);
+
+            if (tarea) {
+                abrirModalVer(tarea);
+            }
+        });
+    });
+}
+
+// Cerrar modal al hacer clic fuera
+document.getElementById('modalTarea')?.addEventListener('click', function (e) {
+    if (e.target === this) {
+        cerrarModal();
+    }
+});
+
+// Cerrar modal de filtros

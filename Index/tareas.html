@@ -43,16 +43,25 @@
         <div class="contenedor-contenido">
             <section class="seccion-contactos">
                 <div class="titulo-seccion">
+                    <div class="botones-accion-header">
+                        <button class="btn-filtrar-tareas" id="btnFiltrarTareas" title="Filtrar tareas" onclick="abrirModalFiltros()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                        </button>
+                    </div>
                     <div class="titulo-texto">
                         <h2>Mis Tareas</h2>
                         <p>Lista de tareas pendientes</p>
                     </div>
-                    <button class="btn-agregar-contacto" title="Agregar tarea" onclick="abrirModalAgregar()">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    </button>
+                    <div class="botones-accion-header">
+                        <button class="btn-agregar-contacto" title="Agregar tarea" onclick="abrirModalAgregar()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="lista-contactos" id="listaTareas">
@@ -68,6 +77,57 @@
             <p>Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Modal de Filtros -->
+    <div id="modalFiltros" class="modal-overlay" style="display: none;">
+        <div class="modal-contenido">
+            <button class="btn-cerrar-modal" onclick="cerrarModalFiltros()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <h2>Filtrar Tareas</h2>
+
+            <div class="filtros-grupo">
+                <h3>Prioridad</h3>
+                <div class="filtros-opciones">
+                    <div class="filtro-opcion">
+                        <input type="checkbox" id="filtro-urgente" value="urgente">
+                        <label for="filtro-urgente">🔴 Urgente</label>
+                    </div>
+                    <div class="filtro-opcion">
+                        <input type="checkbox" id="filtro-normal" value="normal">
+                        <label for="filtro-normal">🟡 Normal</label>
+                    </div>
+                    <div class="filtro-opcion">
+                        <input type="checkbox" id="filtro-baja" value="baja">
+                        <label for="filtro-baja">🟢 Baja</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filtros-grupo">
+                <h3>Estado</h3>
+                <div class="filtros-opciones">
+                    <div class="filtro-opcion">
+                        <input type="checkbox" id="filtro-pendiente" value="pendiente">
+                        <label for="filtro-pendiente">🕐 Pendiente</label>
+                    </div>
+                    <div class="filtro-opcion">
+                        <input type="checkbox" id="filtro-completada" value="completada">
+                        <label for="filtro-completada">✔ Completada</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botones-filtro">
+                <button class="btn-limpiar-filtros" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                <button class="btn-aplicar-filtros" onclick="aplicarFiltros()">Aplicar Filtros</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal para Ver/Editar/Agregar Tarea -->
     <div id="modalTarea" class="modal-overlay" style="display: none;">
@@ -98,9 +158,9 @@
                     <div class="form-group">
                         <select class="entrada_texto entrada_select" id="prioridadTarea" required>
                             <option value="" disabled selected>Elegir una opción</option> 
-                            <option value="urgente">🔴 Urgente</option>
-                            <option value="normal">🟡 Normal</option>
-                            <option value="baja">🟢 Baja</option>
+                            <option value="urgente">Urgente</option>
+                            <option value="normal">Normal</option>
+                            <option value="baja">Baja</option>
                         </select>
                         <label class="label-input label-select" id="label-prioridad">Prioridad</label>
                     </div>
@@ -108,8 +168,8 @@
                     <div class="form-group">
                         <select class="entrada_texto entrada_select" id="estadoTarea" required>
                             <option value="" disabled selected>Elegir una opción</option>
-                            <option value="pendiente">⏳ Pendiente</option>
-                            <option value="completada">✅ Completada</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="completada">Completada</option>
                         </select>
                         <label class="label-input label-select" id="label-estado">Estado</label>
                     </div>
