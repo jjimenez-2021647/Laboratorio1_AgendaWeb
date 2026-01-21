@@ -1,9 +1,9 @@
-// Sistema de Gestión de Tareas - MyDaily
+// Crud de Tareas
 // Variables globales
 let tareaActual = null;
 let modoEdicion = false;
 
-// ========== SISTEMA DE MENSAJES Y CONFIRMACIÓN ==========
+// Mensajes y confirmacion 
 
 // Agregar estilos de animación
 if (!document.querySelector('#mensaje-styles')) {
@@ -39,9 +39,6 @@ if (!document.querySelector('#mensaje-styles')) {
         .entrada_select {
             padding-top: 25px !important;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
             cursor: pointer;
         }
         .label-select {
@@ -144,7 +141,7 @@ function mostrarMensaje(mensaje, callback) {
     });
 }
 
-// Función para mostrar confirmación con dos botones (Aceptar/Cancelar)
+// Función para mostrar confirmar o cancelar
 function mostrarConfirmacion(mensaje, onAceptar, onCancelar) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
@@ -263,7 +260,7 @@ function mostrarConfirmacion(mensaje, onAceptar, onCancelar) {
     });
 }
 
-// ========== GESTIÓN DE TAREAS EN LOCALSTORAGE ==========
+//Tareas en el LocalStorage
 
 function obtenerTareas() {
     const tareas = localStorage.getItem('tareas');
@@ -289,7 +286,7 @@ function generarIdUnico() {
     return Date.now().toString() + Math.random().toString(36).substr(2, 9);
 }
 
-// ========== FUNCIONES DE PRIORIDAD Y COLOR ==========
+//Funciones para color y prioridad
 
 function obtenerColorPrioridad(prioridad) {
     switch (prioridad) {
@@ -326,7 +323,7 @@ function obtenerTextoEstado(estado) {
     }
 }
 
-// ========== FUNCIONES DEL MODAL ==========
+//Modal
 
 function abrirModalAgregar() {
     modoEdicion = false;
@@ -430,7 +427,7 @@ function actualizarBotones() {
             </button>
         `;
     } else if (modoEdicion) {
-        // Modo edición
+        // Modo editar
         contenedor.innerHTML = `
             <button type="submit" class="btn_editar_modal">
                 <span class="bnt_texto">Guardar</span>
@@ -481,7 +478,7 @@ function eliminarTarea() {
     );
 }
 
-// ========== FUNCIONES DE LABELS FLOTANTES ==========
+// Funciones para los labels que se mueven
 
 function activarLabelsFlotantes() {
     const inputs = document.querySelectorAll('.entrada_texto:not([type="date"]):not(select)');
@@ -520,7 +517,7 @@ function activarLabelsFlotantes() {
     });
 }
 
-// ========== VALIDAR Y GUARDAR FORMULARIO ==========
+// Validar y guardar lo del formulario
 
 function validarFormulario() {
     const nombre = document.getElementById('nombreTarea').value.trim();
@@ -586,7 +583,7 @@ document.getElementById('formTarea')?.addEventListener('submit', function (e) {
     }
 });
 
-// ========== SISTEMA DE FILTROS ==========
+// Filtros
 
 // Variable para almacenar filtros activos
 let filtrosActivos = {
@@ -599,7 +596,7 @@ function abrirModalFiltros() {
     const modal = document.getElementById('modalFiltros');
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    
+
     // Restaurar los filtros previamente seleccionados
     restaurarFiltrosSeleccionados();
 }
@@ -611,7 +608,7 @@ document.getElementById('modalFiltros')?.addEventListener('click', function (e) 
     }
 });
 
-// ========== CERRAR SESIÓN ==========
+// cerrar sesion
 
 function cerrarSesion() {
     mostrarConfirmacion(
@@ -624,7 +621,7 @@ function cerrarSesion() {
     );
 }
 
-// ========== INICIALIZACIÓN ==========
+//inicializar
 
 document.addEventListener('DOMContentLoaded', function () {
     cargarTareas();
@@ -689,13 +686,13 @@ function restaurarFiltrosSeleccionados() {
     document.querySelectorAll('#modalFiltros input[type="checkbox"]').forEach(checkbox => {
         checkbox.checked = false;
     });
-    
+
     // Marcar los filtros activos
     filtrosActivos.prioridades.forEach(prioridad => {
         const checkbox = document.getElementById(`filtro-${prioridad}`);
         if (checkbox) checkbox.checked = true;
     });
-    
+
     filtrosActivos.estados.forEach(estado => {
         const checkbox = document.getElementById(`filtro-${estado}`);
         if (checkbox) checkbox.checked = true;
@@ -712,7 +709,7 @@ function aplicarFiltros() {
             prioridades.push(prioridad);
         }
     });
-    
+
     // Obtener estados seleccionados
     const estados = [];
     ['pendiente', 'completada'].forEach(estado => {
@@ -721,20 +718,20 @@ function aplicarFiltros() {
             estados.push(estado);
         }
     });
-    
+
     // Guardar filtros activos
     filtrosActivos.prioridades = prioridades;
     filtrosActivos.estados = estados;
-    
+
     // Actualizar estado visual del botón de filtros
     actualizarBotonFiltros();
-    
+
     // Aplicar filtros y recargar tareas
     cargarTareas();
-    
+
     // Cerrar modal
     cerrarModalFiltros();
-    
+
     // Mostrar mensaje si hay filtros aplicados
     if (prioridades.length > 0 || estados.length > 0) {
         mostrarMensaje('Filtros aplicados correctamente');
@@ -747,27 +744,27 @@ function limpiarFiltros() {
     document.querySelectorAll('#modalFiltros input[type="checkbox"]').forEach(checkbox => {
         checkbox.checked = false;
     });
-    
+
     // Limpiar filtros activos
     filtrosActivos.prioridades = [];
     filtrosActivos.estados = [];
-    
+
     // Actualizar estado visual del botón de filtros
     actualizarBotonFiltros();
-    
+
     // Recargar todas las tareas sin filtros
     cargarTareas();
-    
+
     // Cerrar modal
     cerrarModalFiltros();
-    
+
     mostrarMensaje('Filtros eliminados');
 }
 
 // Actualizar apariencia del botón de filtros
 function actualizarBotonFiltros() {
     const btnFiltrar = document.getElementById('btnFiltrarTareas');
-    
+
     if (filtrosActivos.prioridades.length > 0 || filtrosActivos.estados.length > 0) {
         btnFiltrar.classList.add('activo');
     } else {
@@ -780,19 +777,19 @@ function filtrarTareas(tareas) {
     if (filtrosActivos.prioridades.length === 0 && filtrosActivos.estados.length === 0) {
         return tareas; // Sin filtros, devolver todas
     }
-    
+
     return tareas.filter(tarea => {
-        let cumplePrioridad = filtrosActivos.prioridades.length === 0 || 
-                              filtrosActivos.prioridades.includes(tarea.prioridad);
-        
-        let cumpleEstado = filtrosActivos.estados.length === 0 || 
-                          filtrosActivos.estados.includes(tarea.estado);
-        
+        let cumplePrioridad = filtrosActivos.prioridades.length === 0 ||
+            filtrosActivos.prioridades.includes(tarea.prioridad);
+
+        let cumpleEstado = filtrosActivos.estados.length === 0 ||
+            filtrosActivos.estados.includes(tarea.estado);
+
         return cumplePrioridad && cumpleEstado;
     });
 }
 
-// ========== CARGAR Y RENDERIZAR TAREAS (MODIFICADA CON FILTROS) ==========
+// cargar las tareas segun los filtros
 
 function cargarTareas() {
     let tareas = obtenerTareas();
@@ -809,7 +806,7 @@ function cargarTareas() {
         const mensajeVacio = filtrosActivos.prioridades.length > 0 || filtrosActivos.estados.length > 0
             ? 'No hay tareas que coincidan con los filtros seleccionados'
             : 'No hay tareas guardadas. ¡Agrega tu primera tarea!';
-        
+
         listaTareas.innerHTML = `
             <div style="
                 text-align: center; 

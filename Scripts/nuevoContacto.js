@@ -1,6 +1,4 @@
-// Sistema de Gestión de Contactos - Crear/Editar - MyDaily
-
-// ========== SISTEMA DE MENSAJES ==========
+// Crud de Contactos Nuevos editar y crear
 
 // Agregar estilos de animación
 if (!document.querySelector('#mensaje-styles')) {
@@ -113,7 +111,7 @@ function mostrarMensaje(mensaje, callback) {
     });
 }
 
-// ========== GESTIÓN DE CONTACTOS EN LOCALSTORAGE ==========
+//Contactos en el localStorage 
 
 function obtenerContactos() {
     const contactos = localStorage.getItem('contactos');
@@ -133,13 +131,13 @@ function generarIdUnico() {
     return Date.now().toString() + Math.random().toString(36).substr(2, 9);
 }
 
-// ========== VARIABLES GLOBALES ==========
+//variables globales
 
 let modoEdicion = false;
 let contactoEditando = null;
 let imagenBase64 = null;
 
-// ========== PREVIEW DE IMAGEN ==========
+//preview de la imagen
 
 document.getElementById('imagenContacto').addEventListener('change', function(e) {
     const file = e.target.files[0];
@@ -167,7 +165,7 @@ document.getElementById('imagenContacto').addEventListener('change', function(e)
     }
 });
 
-// ========== FUNCIONES DE LABELS FLOTANTES ==========
+//Funcion para los labels que se mueven
 
 function activarLabelsFlotantes() {
     const inputs = document.querySelectorAll('.entrada_texto:not([type="date"])');
@@ -201,7 +199,7 @@ function activarLabelsFlotantes() {
     });
 }
 
-// ========== INICIALIZAR MODO (CREAR O EDITAR) ==========
+//Comenzar a crear o editar
 
 function inicializarFormulario() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -228,7 +226,7 @@ function inicializarFormulario() {
     actualizarBotones();
 }
 
-// ========== CARGAR DATOS DEL CONTACTO EN MODO EDICIÓN ==========
+//Cargar datos para poder editar
 
 function cargarDatosContacto(contacto) {
     document.getElementById('nombreContacto').value = contacto.nombre || '';
@@ -250,7 +248,7 @@ function cargarDatosContacto(contacto) {
     activarLabelsFlotantes();
 }
 
-// ========== ACTUALIZAR BOTONES SEGÚN MODO ==========
+//botones segun el modo ya sea agregar o editar
 
 function actualizarBotones() {
     const contenedorBoton = document.querySelector('.contenedor-boton');
@@ -278,7 +276,7 @@ function actualizarBotones() {
     }
 }
 
-// ========== VALIDAR FORMULARIO ==========
+//validar el formulario
 
 function validarFormulario() {
     const nombre = document.getElementById('nombreContacto').value.trim();
@@ -300,7 +298,7 @@ function validarFormulario() {
         return false;
     }
     
-    // Validar teléfono (formato básico)
+    // Validar teléfono
     const telefonoRegex = /^[\d\s\+\-\(\)]+$/;
     if (!telefonoRegex.test(telefono)) {
         mostrarMensaje('Por favor ingresa un teléfono válido');
@@ -310,7 +308,7 @@ function validarFormulario() {
     return true;
 }
 
-// ========== GUARDAR O ACTUALIZAR CONTACTO ==========
+//guardar o actualizar el contacto
 
 function guardarContacto(e) {
     e.preventDefault();
@@ -358,7 +356,7 @@ function guardarContacto(e) {
     }
 }
 
-// ========== CERRAR SESIÓN ==========
+//cerrar sesión
 
 function cerrarSesion() {
     mostrarMensaje('¿Estás seguro que deseas cerrar sesión?', function() {
@@ -367,7 +365,7 @@ function cerrarSesion() {
     });
 }
 
-// ========== INICIALIZACIÓN ==========
+//Inicializar
 
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar formulario

@@ -1,8 +1,6 @@
-// Sistema de Gestión de Contactos Favoritos - MyDaily
+// Crud de favoritos
 // Variables globales
 let contactoActual = null;
-
-// ========== SISTEMA DE MENSAJES Y CONFIRMACIÓN ==========
 
 // Agregar estilos de animación
 if (!document.querySelector('#mensaje-styles')) {
@@ -31,7 +29,7 @@ if (!document.querySelector('#mensaje-styles')) {
     document.head.appendChild(style);
 }
 
-// Función para mostrar mensajes informativos
+// Función para mostrar mensajes 
 function mostrarMensaje(mensaje) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
@@ -109,7 +107,7 @@ function mostrarMensaje(mensaje) {
     });
 }
 
-// Función para mostrar confirmación con dos botones
+// Función para mostrar confirmar o cancelar
 function mostrarConfirmacion(mensaje, imagenUrl, onAceptar, onCancelar) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
@@ -241,7 +239,7 @@ function mostrarConfirmacion(mensaje, imagenUrl, onAceptar, onCancelar) {
     });
 }
 
-// ========== GESTIÓN DE CONTACTOS EN LOCALSTORAGE ==========
+//Contactos en el LocalStorage
 
 function obtenerContactos() {
     const contactos = localStorage.getItem('contactos');
@@ -269,7 +267,7 @@ function eliminarContactoPorId(id) {
     guardarContactos(contactos);
 }
 
-// ========== FUNCIONES DEL MODAL ==========
+//Modal
 
 function abrirModalDetalles(contacto) {
     contactoActual = contacto;
@@ -373,7 +371,7 @@ function actualizarBotonFavorito(esFavorito) {
     }
 }
 
-// ========== CARGAR Y RENDERIZAR CONTACTOS FAVORITOS ==========
+//Recargar los contactos
 
 function cargarContactos() {
     const contactosFavoritos = obtenerContactosFavoritos();
@@ -448,13 +446,13 @@ function cargarContactos() {
     });
 }
 
-// ========== INICIALIZACIÓN ==========
+//inicializar
 
 document.addEventListener('DOMContentLoaded', function() {
     cargarContactos();
 });
 
-// Hacer funciones disponibles globalmente
+
 window.cerrarModal = cerrarModal;
 window.editarContacto = editarContacto;
 window.eliminarContacto = eliminarContacto;

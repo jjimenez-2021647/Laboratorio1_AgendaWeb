@@ -427,7 +427,6 @@ body::after {
     text-decoration: underline;
 }
 
-/* Scrollbar personalizada */
 .flip-card-front::-webkit-scrollbar,
 .flip-card-back::-webkit-scrollbar {
     width: 6px;

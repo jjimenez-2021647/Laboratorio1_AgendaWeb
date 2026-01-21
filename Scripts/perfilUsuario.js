@@ -48,7 +48,7 @@ function cargarDatosUsuario() {
             document.getElementById('direccionContacto').value = usuario.direccion || '';
             document.getElementById('fechaRegistro').value = usuario.fechaRegistro ? usuario.fechaRegistro.split('T')[0] : '';
 
-            // Cargar imagen: si existe usa la del usuario, si no usa la por defecto
+            // Cargar imagen si existe, si no usa la por default
             const imagenPerfil = document.getElementById('preview-imagen');
             if (usuario.imagen && usuario.imagen !== '../Images/Perfil.jpg') {
                 imagenPerfil.src = usuario.imagen;
@@ -193,7 +193,7 @@ function actualizarPerfil() {
     }
 }
 
-// FUNCIONALIDAD DE VER/OCULTAR CONTRASEÑAS
+//Funcion para ver y ocultar contraseñas
 function crearIconoOjo(inputPassword) {
     const contenedor = inputPassword.parentElement;
 
@@ -202,7 +202,7 @@ function crearIconoOjo(inputPassword) {
     btnToggle.type = 'button';
     btnToggle.className = 'toggle-password';
 
-    // SVG del ojo abierto (contraseña oculta)
+    // SVG del ojo abierto 
     const ojoAbierto = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -210,7 +210,7 @@ function crearIconoOjo(inputPassword) {
         </svg>
     `;
 
-    // SVG del ojo cerrado (contraseña visible)
+    // SVG del ojo cerrado 
     const ojoCerrado = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
@@ -220,7 +220,7 @@ function crearIconoOjo(inputPassword) {
 
     btnToggle.innerHTML = ojoAbierto;
 
-    // Toggle para mostrar/ocultar contraseña
+    // Toggle para mostrar y ocultar contraseña
     btnToggle.addEventListener('click', () => {
         const tipo = inputPassword.type === 'password' ? 'text' : 'password';
         inputPassword.type = tipo;
@@ -236,7 +236,7 @@ function crearIconoOjo(inputPassword) {
     contenedor.appendChild(btnToggle);
 }
 
-// FUNCIÓN PARA MOSTRAR MENSAJES CON MODAL
+//Funcion para los manesajes con modal
 function mostrarMensaje(mensaje) {
     // Crear overlay oscuro
     const overlay = document.createElement('div');
@@ -267,7 +267,7 @@ function mostrarMensaje(mensaje) {
         animation: slideUp 0.3s ease-out;
     `;
 
-    // Contenido del modal - SIEMPRE CON FANTASMA 👻
+    // Contenido del modal - siempre mi 👻
     modal.innerHTML = `
         <div style="font-size: 50px; margin-bottom: 15px;">👻</div>
         <p style="color: #1a3a52; font-size: 16px; margin-bottom: 25px; line-height: 1.5; font-weight: 500;">

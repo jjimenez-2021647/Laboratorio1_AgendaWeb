@@ -350,7 +350,7 @@ body::after {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Estilos para iconos SVG en tareas */
+/* Estilos para SVG */
 .icon-svg {
     width: 16px;
     height: 16px;
@@ -499,7 +499,7 @@ option .icon-svg {
     background: rgba(255, 255, 255, 0.10);
 }
 
-/* Label flotante - Estado inicial (dentro del input) */
+/* Label flotante - para antes de que se apache*/
 .label-input {
     position: absolute;
     left: 15px;
@@ -515,7 +515,7 @@ option .icon-svg {
     white-space: nowrap;
 }
 
-/* Label flotante - Estado activo (arriba con fondo azul) */
+/* Label flotante - para cuando se apache */
 .label-input-activo {
     top: 0;
     transform: translateY(-50%);
@@ -797,10 +797,6 @@ input[type="date"].entrada_texto {
         padding: 12px;
     }
 }
-
-/* ========================================== */
-/* ESTILOS ADICIONALES PARA FILTROS */
-/* ========================================== */
 
 /* Contenedor de botones en el header */
 .botones-accion-header {

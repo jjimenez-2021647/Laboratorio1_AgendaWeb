@@ -543,7 +543,7 @@ input[type="date"].entrada_texto::-webkit-calendar-picker-indicator {
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
-/* Agregar padding derecho al input de contraseña para que el texto no se tape con el ícono */
+/* padding derecho en el input de contraseña para que el texto no se tape con el ícono */
 input[type="password"].entrada_texto {
     padding-right: 45px;
 }

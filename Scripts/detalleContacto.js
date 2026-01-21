@@ -1,10 +1,8 @@
-// Sistema de Gestión de Contactos - MyDaily
+// Crud contactos
 // Variables globales
 let contactoActual = null;
 
-// ========== SISTEMA DE MENSAJES Y CONFIRMACIÓN ==========
-
-// Agregar estilos de animación
+// Agregar estilos de animación referente a los mensajes de alerta
 if (!document.querySelector('#mensaje-styles')) {
     const style = document.createElement('style');
     style.id = 'mensaje-styles';
@@ -31,7 +29,7 @@ if (!document.querySelector('#mensaje-styles')) {
     document.head.appendChild(style);
 }
 
-// Función para mostrar mensajes informativos (estilo de login.js)
+// Función para mostrar mensajes informativos}
 function mostrarMensaje(mensaje) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
@@ -47,7 +45,7 @@ function mostrarMensaje(mensaje) {
         align-items: center;
         animation: fadeIn 0.3s ease-out;
     `;
-    
+
     const modal = document.createElement('div');
     modal.style.cssText = `
         background: white;
@@ -59,7 +57,7 @@ function mostrarMensaje(mensaje) {
         text-align: center;
         animation: slideUp 0.3s ease-out;
     `;
-    
+
     modal.innerHTML = `
         <div style="font-size: 50px; margin-bottom: 15px;">👻</div>
         <p style="color: #1a3a52; font-size: 16px; margin-bottom: 25px; line-height: 1.5; font-weight: 500;">
@@ -80,30 +78,30 @@ function mostrarMensaje(mensaje) {
             Aceptar
         </button>
     `;
-    
+
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-    
+
     const btnAceptar = document.getElementById('btnAceptarMensaje');
-    
+
     // Efectos hover
-    btnAceptar.addEventListener('mouseenter', function() {
+    btnAceptar.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-2px)';
         this.style.boxShadow = '0 6px 15px rgba(9, 154, 161, 0.4)';
     });
-    
-    btnAceptar.addEventListener('mouseleave', function() {
+
+    btnAceptar.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = '0 4px 10px rgba(9, 154, 161, 0.3)';
     });
-    
+
     // Cerrar modal
-    btnAceptar.addEventListener('click', function() {
+    btnAceptar.addEventListener('click', function () {
         overlay.style.animation = 'fadeOut 0.3s ease-out';
         setTimeout(() => overlay.remove(), 300);
     });
-    
-    overlay.addEventListener('click', function(e) {
+
+    overlay.addEventListener('click', function (e) {
         if (e.target === overlay) {
             overlay.style.animation = 'fadeOut 0.3s ease-out';
             setTimeout(() => overlay.remove(), 300);
@@ -111,7 +109,7 @@ function mostrarMensaje(mensaje) {
     });
 }
 
-// Función para mostrar confirmación con dos botones (Aceptar/Cancelar)
+// Función para mostrar confirmación ya sea confirmar o cancelar
 function mostrarConfirmacion(mensaje, imagenUrl, onAceptar, onCancelar) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
@@ -127,7 +125,7 @@ function mostrarConfirmacion(mensaje, imagenUrl, onAceptar, onCancelar) {
         align-items: center;
         animation: fadeIn 0.3s ease-out;
     `;
-    
+
     const modal = document.createElement('div');
     modal.style.cssText = `
         background: white;
@@ -139,7 +137,7 @@ function mostrarConfirmacion(mensaje, imagenUrl, onAceptar, onCancelar) {
         text-align: center;
         animation: slideUp 0.3s ease-out;
     `;
-    
+
     modal.innerHTML = `
         <div style="
             width: 100px;
@@ -189,55 +187,55 @@ function mostrarConfirmacion(mensaje, imagenUrl, onAceptar, onCancelar) {
             </button>
         </div>
     `;
-    
+
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-    
+
     const btnCancelar = document.getElementById('btnCancelarConfirmacion');
     const btnAceptar = document.getElementById('btnAceptarConfirmacion');
-    
+
     // Efectos hover botón Cancelar
-    btnCancelar.addEventListener('mouseenter', function() {
+    btnCancelar.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-2px)';
         this.style.boxShadow = '0 6px 15px rgba(220, 53, 69, 0.4)';
     });
-    
-    btnCancelar.addEventListener('mouseleave', function() {
+
+    btnCancelar.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = '0 4px 10px rgba(220, 53, 69, 0.3)';
     });
-    
+
     // Efectos hover botón Aceptar
-    btnAceptar.addEventListener('mouseenter', function() {
+    btnAceptar.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-2px)';
         this.style.boxShadow = '0 6px 15px rgba(9, 154, 161, 0.4)';
     });
-    
-    btnAceptar.addEventListener('mouseleave', function() {
+
+    btnAceptar.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = '0 4px 10px rgba(9, 154, 161, 0.3)';
     });
-    
+
     // Evento Cancelar
-    btnCancelar.addEventListener('click', function() {
+    btnCancelar.addEventListener('click', function () {
         overlay.style.animation = 'fadeOut 0.3s ease-out';
         setTimeout(() => {
             overlay.remove();
             if (onCancelar) onCancelar();
         }, 300);
     });
-    
+
     // Evento Aceptar
-    btnAceptar.addEventListener('click', function() {
+    btnAceptar.addEventListener('click', function () {
         overlay.style.animation = 'fadeOut 0.3s ease-out';
         setTimeout(() => {
             overlay.remove();
             if (onAceptar) onAceptar();
         }, 300);
     });
-    
-    // Cerrar al hacer clic fuera (cuenta como cancelar)
-    overlay.addEventListener('click', function(e) {
+
+    // Cerrar al hacer clic fuera 
+    overlay.addEventListener('click', function (e) {
         if (e.target === overlay) {
             overlay.style.animation = 'fadeOut 0.3s ease-out';
             setTimeout(() => {
@@ -247,8 +245,6 @@ function mostrarConfirmacion(mensaje, imagenUrl, onAceptar, onCancelar) {
         }
     });
 }
-
-// ========== GESTIÓN DE CONTACTOS EN LOCALSTORAGE ==========
 
 // Función para obtener todos los contactos
 function obtenerContactos() {
@@ -279,7 +275,7 @@ function eliminarContactoPorId(id) {
 // Función para abrir el modal con los detalles del contacto
 function abrirModalDetalles(contacto) {
     contactoActual = contacto;
-    
+
     // Llenar los datos del modal
     document.getElementById('modal-imagen').src = contacto.imagen;
     document.getElementById('modal-nombre').value = contacto.nombre;
@@ -288,11 +284,11 @@ function abrirModalDetalles(contacto) {
     document.getElementById('modal-correo').value = contacto.correo;
     document.getElementById('modal-direccion').value = contacto.direccion;
     document.getElementById('modal-fecha').value = contacto.fecha;
-    
+
     // Mostrar el modal
     document.getElementById('modalDetalles').style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    
+
     // Actualizar botón de favorito según el estado
     actualizarBotonFavorito(contacto.favorito || false);
 }
@@ -305,7 +301,7 @@ function cerrarModal() {
 }
 
 // Cerrar modal al hacer clic fuera
-document.getElementById('modalDetalles')?.addEventListener('click', function(e) {
+document.getElementById('modalDetalles')?.addEventListener('click', function (e) {
     if (e.target === this) {
         cerrarModal();
     }
@@ -314,10 +310,10 @@ document.getElementById('modalDetalles')?.addEventListener('click', function(e) 
 // Función para editar contacto
 function editarContacto() {
     if (!contactoActual) return;
-    
+
     // Guardar el contacto en sessionStorage para editarlo
     sessionStorage.setItem('contactoEditar', JSON.stringify(contactoActual));
-    
+
     // Redirigir a la página de edición
     window.location.href = `nuevoContacto.html?id=${contactoActual.id}&modo=editar`;
 }
@@ -325,18 +321,18 @@ function editarContacto() {
 // Función para eliminar contacto
 function eliminarContacto() {
     if (!contactoActual) return;
-    
+
     const nombreCompleto = `${contactoActual.nombre} ${contactoActual.apellido}`;
-    
+
     mostrarConfirmacion(
         `¿Estás seguro que quieres eliminar a ${nombreCompleto}?`,
         contactoActual.imagen,
         // Función cuando acepta
-        function() {
+        function () {
             eliminarContactoPorId(contactoActual.id);
             cerrarModal();
             mostrarMensaje('Contacto eliminado exitosamente');
-            
+
             // Recargar la lista después de 1 segundo
             setTimeout(() => {
                 cargarContactos();
@@ -347,27 +343,27 @@ function eliminarContacto() {
     );
 }
 
-// Función para marcar/desmarcar favorito
+// Función para agregar o quitar favorito
 function toggleFavorito() {
     if (!contactoActual) return;
-    
+
     let contactos = obtenerContactos();
     const index = contactos.findIndex(c => c.id === contactoActual.id);
-    
+
     if (index !== -1) {
         contactos[index].favorito = !contactos[index].favorito;
         guardarContactos(contactos);
-        
+
         const esFavorito = contactos[index].favorito;
-        const mensaje = esFavorito ? 
-            'Contacto agregado a favoritos' : 
+        const mensaje = esFavorito ?
+            'Contacto agregado a favoritos' :
             'Contacto removido de favoritos';
-        
+
         mostrarMensaje(mensaje);
-        
+
         // Actualizar el botón
         actualizarBotonFavorito(esFavorito);
-        
+
         // Actualizar contacto actual
         contactoActual.favorito = esFavorito;
     }
@@ -377,7 +373,7 @@ function toggleFavorito() {
 function actualizarBotonFavorito(esFavorito) {
     const textoFavorito = document.getElementById('texto-favorito');
     const iconoFavorito = document.getElementById('icono-favorito');
-    
+
     if (textoFavorito && iconoFavorito) {
         if (esFavorito) {
             textoFavorito.textContent = 'Quitar de Favoritos';
@@ -391,18 +387,17 @@ function actualizarBotonFavorito(esFavorito) {
     }
 }
 
-// ========== CARGAR Y RENDERIZAR CONTACTOS ==========
 
 // Función para renderizar la lista de contactos dinámicamente
 function cargarContactos() {
     const contactos = obtenerContactos();
     const listaContactos = document.querySelector('.lista-contactos');
-    
+
     if (!listaContactos) return;
-    
+
     // Limpiar lista actual
     listaContactos.innerHTML = '';
-    
+
     // Si no hay contactos
     if (contactos.length === 0) {
         listaContactos.innerHTML = `
@@ -421,7 +416,7 @@ function cargarContactos() {
         `;
         return;
     }
-    
+
     // Renderizar cada contacto
     contactos.forEach(contacto => {
         const contactoHTML = `
@@ -447,17 +442,17 @@ function cargarContactos() {
                 </div>
             </div>
         `;
-        
+
         listaContactos.insertAdjacentHTML('beforeend', contactoHTML);
     });
-    
+
     // Agregar event listeners a los botones recién creados
     document.querySelectorAll('.btn-ver-detalles').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const contactoItem = this.closest('.contacto-item');
             const contactoId = contactoItem.getAttribute('data-id');
             const contacto = obtenerContactoPorId(contactoId);
-            
+
             if (contacto) {
                 abrirModalDetalles(contacto);
             }
@@ -465,14 +460,11 @@ function cargarContactos() {
     });
 }
 
-// ========== INICIALIZACIÓN ==========
-
-// Modificar los botones de "ver detalles" en el HTML
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Cargar contactos desde localStorage
     cargarContactos();
-    
-    // Si no hay contactos, crear algunos de ejemplo (OPCIONAL - puedes comentar esto)
+
+    // Si no hay contactos, crear algunos de ejemplo 
     const contactos = obtenerContactos();
     if (contactos.length === 0) {
         const contactosEjemplo = [

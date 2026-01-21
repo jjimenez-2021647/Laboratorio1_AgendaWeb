@@ -1,35 +1,35 @@
-// Sistema de Login y Registro - MyDaily
+//Sistema de Login y Registro
 
-// Elementos del DOM
-const flipCard = document.getElementById('flipCard');
-const btnRegistro = document.getElementById('btnRegistro');
-const btnLogin = document.getElementById('btnLogin');
+//Elementos del DOM 
+const tarjetaVolteadora = document.getElementById('flipCard');
+const botonRegistro = document.getElementById('btnRegistro');
+const botonLogin = document.getElementById('btnLogin');
 const formularioLogin = document.getElementById('formularioLogin');
 const formularioRegistro = document.getElementById('formularioRegistro');
 
-// Cambiar entre Login y Registro
-btnRegistro.addEventListener('click', function(e) {
-    e.preventDefault();
-    flipCard.style.transform = 'rotateY(180deg)';
+//Cambiar entre Login y Registro
+botonRegistro.addEventListener('click', function(evento) {
+    evento.preventDefault();
+    tarjetaVolteadora.style.transform = 'rotateY(180deg)';
 });
 
-btnLogin.addEventListener('click', function(e) {
-    e.preventDefault();
-    flipCard.style.transform = 'rotateY(0deg)';
+botonLogin.addEventListener('click', function(evento) {
+    evento.preventDefault();
+    tarjetaVolteadora.style.transform = 'rotateY(0deg)';
 });
 
-// FUNCIONALIDAD DE VER/OCULTAR CONTRASEÑAS
+//Funcionalidad para las contraseñas
 
-// Crear iconos SVG para mostrar/ocultar contraseña
-function crearIconoOjo(inputPassword) {
-    const contenedor = inputPassword.parentElement;
+//SVG para mostrar/ocultar contraseña
+function crearIconoOjo(campoContrasena) {
+    const contenedor = campoContrasena.parentElement;
     
-    // Crear botón para el icono
-    const btnToggle = document.createElement('button');
-    btnToggle.type = 'button';
-    btnToggle.className = 'toggle-password';
+    //botón para el icono
+    const botonAlternar = document.createElement('button');
+    botonAlternar.type = 'button';
+    botonAlternar.className = 'toggle-password';
     
-    // SVG del ojo abierto (contraseña oculta)
+    //SVG del ojo abierto 
     const ojoAbierto = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -37,7 +37,7 @@ function crearIconoOjo(inputPassword) {
         </svg>
     `;
     
-    // SVG del ojo cerrado (contraseña visible)
+    //SVG del ojo cerrado
     const ojoCerrado = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
@@ -45,39 +45,48 @@ function crearIconoOjo(inputPassword) {
         </svg>
     `;
     
-    btnToggle.innerHTML = ojoAbierto;
+    botonAlternar.innerHTML = ojoAbierto;
     
-    // Toggle para mostrar/ocultar contraseña
-    btnToggle.addEventListener('click', () => {
-        const tipo = inputPassword.type === 'password' ? 'text' : 'password';
-        inputPassword.type = tipo;
+    //Alternar para mostrar y ocultar contraseña
+    botonAlternar.addEventListener('click', () => {
+        const tipo = campoContrasena.type === 'password' ? 'text' : 'password';
+        campoContrasena.type = tipo;
         
         // Cambiar icono
         if (tipo === 'text') {
-            btnToggle.innerHTML = ojoCerrado;
+            botonAlternar.innerHTML = ojoCerrado;
         } else {
-            btnToggle.innerHTML = ojoAbierto;
+            botonAlternar.innerHTML = ojoAbierto;
         }
     });
     
-    contenedor.appendChild(btnToggle);
+    contenedor.appendChild(botonAlternar);
 }
 
-// Agregar iconos a todos los campos de contraseña
+//iconos a todos los campos de contraseña
 document.addEventListener('DOMContentLoaded', function() {
-    const camposPassword = document.querySelectorAll('input[type="password"]');
-    camposPassword.forEach(input => crearIconoOjo(input));
+    const camposContrasena = document.querySelectorAll('input[type="password"]');
+    camposContrasena.forEach(campo => crearIconoOjo(campo));
     
-    // Cargar datos de "Recordarme" si existen
+    //Cargar datos de "Recordarme" si existen
     cargarRecordarme();
+    
+    //👻 al enlace de "Olvidaste tu contraseña"
+    const botonOlvideContrasena = document.querySelector('.olvido-contrasena');
+    if (botonOlvideContrasena) {
+        botonOlvideContrasena.addEventListener('click', function(evento) {
+            evento.preventDefault();
+            mostrarModalOlvideContrasena();
+        });
+    }
 });
 
-// FUNCIÓN PARA MOSTRAR MENSAJES CON MODAL
+//👻
 
-function mostrarMensaje(mensaje) {
-    // Crear overlay oscuro
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
+function mostrarModalOlvideContrasena() {
+    //Crear superposición oscura
+    const superposicion = document.createElement('div');
+    superposicion.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
@@ -88,10 +97,59 @@ function mostrarMensaje(mensaje) {
         display: flex;
         justify-content: center;
         align-items: center;
-        animation: fadeIn 0.3s ease-out;
+        animation: aparecerGradual 0.3s ease-out;
     `;
     
-    // Crear modal
+    //Crear modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        background: white;
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        max-width: 300px;
+        width: 90%;
+        text-align: center;
+        animation: deslizarArriba 0.3s ease-out;
+    `;
+    
+    modal.innerHTML = `
+        <div style="font-size: 80px;">👻</div>
+        <div style="font-size: 20px;">Que lo siento bro</div>
+    `;
+    
+    superposicion.appendChild(modal);
+    document.body.appendChild(superposicion);
+    
+    //Cerrar modal al hacer clic fuera de él
+    superposicion.addEventListener('click', function(evento) {
+        if (evento.target === superposicion) {
+            superposicion.style.animation = 'desaparecerGradual 0.3s ease-out';
+            setTimeout(() => superposicion.remove(), 300);
+        }
+    });
+}
+
+//mensajes a mostrar en js
+
+function mostrarMensaje(mensaje) {
+    //Crear superposición oscura
+    const superposicion = document.createElement('div');
+    superposicion.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: aparecerGradual 0.3s ease-out;
+    `;
+    
+    //Crear modal
     const modal = document.createElement('div');
     modal.style.cssText = `
         background: white;
@@ -101,16 +159,16 @@ function mostrarMensaje(mensaje) {
         max-width: 400px;
         width: 90%;
         text-align: center;
-        animation: slideUp 0.3s ease-out;
+        animation: deslizarArriba 0.3s ease-out;
     `;
     
-    // Contenido del modal
+    //Contenido del modal
     modal.innerHTML = `
         <div style="font-size: 50px; margin-bottom: 15px;">👻</div>
         <p style="color: #1a3a52; font-size: 16px; margin-bottom: 25px; line-height: 1.5; font-weight: 500;">
             ${mensaje}
         </p>
-        <button id="btnAceptarMensaje" style="
+        <button id="botonAceptarMensaje" style="
             background: #099aa1;
             color: white;
             border: none;
@@ -126,42 +184,42 @@ function mostrarMensaje(mensaje) {
         </button>
     `;
     
-    overlay.appendChild(modal);
-    document.body.appendChild(overlay);
+    superposicion.appendChild(modal);
+    document.body.appendChild(superposicion);
     
-    // Efecto hover en el botón
-    const btnAceptar = document.getElementById('btnAceptarMensaje');
-    btnAceptar.addEventListener('mouseenter', function() {
+    //Efecto al pasar el cursor sobre el botón
+    const botonAceptar = document.getElementById('botonAceptarMensaje');
+    botonAceptar.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-2px)';
         this.style.boxShadow = '0 6px 15px rgba(9, 154, 161, 0.4)';
     });
     
-    btnAceptar.addEventListener('mouseleave', function() {
+    botonAceptar.addEventListener('mouseleave', function() {
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = '0 4px 10px rgba(9, 154, 161, 0.3)';
     });
     
-    // Cerrar modal al hacer clic en el botón
-    btnAceptar.addEventListener('click', function() {
-        overlay.style.animation = 'fadeOut 0.3s ease-out';
-        setTimeout(() => overlay.remove(), 300);
+    //Cerrar modal al hacer clic en el botón
+    botonAceptar.addEventListener('click', function() {
+        superposicion.style.animation = 'desaparecerGradual 0.3s ease-out';
+        setTimeout(() => superposicion.remove(), 300);
     });
     
-    // Cerrar modal al hacer clic fuera de él
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) {
-            overlay.style.animation = 'fadeOut 0.3s ease-out';
-            setTimeout(() => overlay.remove(), 300);
+    //Cerrar modal al hacer clic fuera de él
+    superposicion.addEventListener('click', function(evento) {
+        if (evento.target === superposicion) {
+            superposicion.style.animation = 'desaparecerGradual 0.3s ease-out';
+            setTimeout(() => superposicion.remove(), 300);
         }
     });
 }
 
-// Agregar estilos de animación
-if (!document.querySelector('#mensaje-styles')) {
-    const style = document.createElement('style');
-    style.id = 'mensaje-styles';
-    style.textContent = `
-        @keyframes fadeIn {
+//Agregar estilos de animación
+if (!document.querySelector('#estilos-mensaje')) {
+    const estilo = document.createElement('style');
+    estilo.id = 'estilos-mensaje';
+    estilo.textContent = `
+        @keyframes aparecerGradual {
             from {
                 opacity: 0;
             }
@@ -169,7 +227,7 @@ if (!document.querySelector('#mensaje-styles')) {
                 opacity: 1;
             }
         }
-        @keyframes fadeOut {
+        @keyframes desaparecerGradual {
             from {
                 opacity: 1;
             }
@@ -177,7 +235,7 @@ if (!document.querySelector('#mensaje-styles')) {
                 opacity: 0;
             }
         }
-        @keyframes slideUp {
+        @keyframes deslizarArriba {
             from {
                 transform: translateY(50px);
                 opacity: 0;
@@ -188,19 +246,19 @@ if (!document.querySelector('#mensaje-styles')) {
             }
         }
     `;
-    document.head.appendChild(style);
+    document.head.appendChild(estilo);
 }
 
-// REGISTRO DE USUARIO
+//registro
 
-formularioRegistro.addEventListener('submit', function(e) {
-    e.preventDefault();
+formularioRegistro.addEventListener('submit', function(evento) {
+    evento.preventDefault();
     
     const correo = document.getElementById('correoRegistro').value.trim();
     const contrasena = document.getElementById('contrasenaRegistro').value;
     const confirmarContrasena = document.getElementById('confirmarContrasena').value;
     
-    // Validaciones
+    //Validaciones
     if (!correo || !contrasena || !confirmarContrasena) {
         mostrarMensaje('Por favor completa todos los campos');
         return;
@@ -216,16 +274,16 @@ formularioRegistro.addEventListener('submit', function(e) {
         return;
     }
     
-    // Verificar si el usuario ya existe
+    //Verificar si el usuario ya existe
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    const usuarioExiste = usuarios.find(u => u.correo === correo);
+    const usuarioExiste = usuarios.find(usuario => usuario.correo === correo);
     
     if (usuarioExiste) {
         mostrarMensaje('Este correo ya está registrado');
         return;
     }
     
-    // Crear nuevo usuario
+    //Crear nuevo usuario
     const nuevoUsuario = {
         correo: correo,
         contrasena: contrasena,
@@ -237,52 +295,52 @@ formularioRegistro.addEventListener('submit', function(e) {
     
     mostrarMensaje('¡Registro exitoso! Ahora puedes iniciar sesión');
     
-    // Limpiar formulario
+    //Limpiar formulario
     formularioRegistro.reset();
     
-    // Cambiar a vista de login después de 1.5 segundos
+    //Cambiar a vista de login después de 1.5 segundos
     setTimeout(() => {
-        flipCard.style.transform = 'rotateY(0deg)';
-        // Pre-llenar el correo en el login
+        tarjetaVolteadora.style.transform = 'rotateY(0deg)';
+        //Pre-llenar el correo en el login
         document.getElementById('correo').value = correo;
     }, 1500);
 });
 
-// INICIO DE SESIÓN
+//inicio de sesion
 
-formularioLogin.addEventListener('submit', function(e) {
-    e.preventDefault();
+formularioLogin.addEventListener('submit', function(evento) {
+    evento.preventDefault();
     
     const correo = document.getElementById('correo').value.trim();
     const contrasena = document.getElementById('contrasena').value;
     const recordar = document.getElementById('recordar').checked;
     
-    // Validaciones básicas
+    //Validaciones básicas
     if (!correo || !contrasena) {
         mostrarMensaje('Por favor completa todos los campos');
         return;
     }
     
-    // Verificar credenciales
+    //Verificar credenciales
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    const usuario = usuarios.find(u => u.correo === correo && u.contrasena === contrasena);
+    const usuario = usuarios.find(usuario => usuario.correo === correo && usuario.contrasena === contrasena);
     
     if (!usuario) {
         mostrarMensaje('Correo o contraseña incorrectos');
         return;
     }
     
-    // Login exitoso
+    //Login exitoso
     mostrarMensaje('¡Bienvenido a MyDaily!');
     
-    // Guardar sesión actual
+    //Guardar sesión actual
     const sesionActual = {
         correo: correo,
         fechaLogin: new Date().toISOString()
     };
     sessionStorage.setItem('sesionActual', JSON.stringify(sesionActual));
     
-    // Guardar datos si marcó "Recordarme"
+    //Guardar datos si marcó "Recordarme"
     if (recordar) {
         localStorage.setItem('recordarUsuario', JSON.stringify({
             correo: correo,
@@ -292,13 +350,13 @@ formularioLogin.addEventListener('submit', function(e) {
         localStorage.removeItem('recordarUsuario');
     }
     
-    // Redirigir a la página principal
+    //Redirigir a la página principal
     setTimeout(() => {
         window.location.href = './Index/principal.html';
     }, 1000);
 });
 
-// CARGAR DATOS DE "RECORDARME"
+//cargar datos del usuario logeado con el recuerdame
 
 function cargarRecordarme() {
     const datosGuardados = JSON.parse(localStorage.getItem('recordarUsuario') || 'null');
@@ -310,7 +368,7 @@ function cargarRecordarme() {
     }
 }
 
-// Función para cerrar sesión (puedes usarla en Principal.html)
+//Función para cerrar sesión
 function cerrarSesion(mantenerRecordarme = true) {
     sessionStorage.removeItem('sesionActual');
     
